@@ -2,34 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import crossroads from 'crossroads';
-import Main from './pages/main';
-import About from './pages/about';
-import About2 from './pages/about2';
 
-let render = function(component){
-    return function() {
+let render = function(page){
+    return ()=> page().then(({default:component})=>{
         ReactDOM.render(
-            component,
+            React.createElement(component),
             document.getElementById('root')
         );
-    };
+    });
 }
 if (typeof document == 'undefined') {
-    var currentComponent = null;
-    render = function (component){
-        
-        currentComponent = component;
+    var currentPage = null;
+    render = function (page){
+
+        currentPage = page;
     }
     module.exports = function render(locals) {
         crossroads.parse(locals.path);
-        return {
-            root:ReactDOMServer.renderToString(currentComponent)
-        };
+        return currentPage().then(({default:component})=>{
+            return {
+                root:ReactDOMServer.renderToString(React.createElement(component))
+            };
+        });
     };
 }
-crossroads.addRoute("/about",render(<About></About>));
-crossroads.addRoute("/about2",render(<About2></About2>));
-crossroads.addRoute(":rest*:",render(<Main></Main>));
+crossroads.addRoute("/about",render(require('promise?global!./pages/about.js')));
+crossroads.addRoute("/about2",render(require('promise?global!./pages/about2.js')));
+crossroads.addRoute(":rest*:",render(require('promise?global!./pages/main.js')));
 
 
 // Client render (optional):
