@@ -5,9 +5,9 @@ module.exports = function(config){
     var loader;
     if (process.env.NODE_ENV == "production"){
         loader ={test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass')};
-        config.plugins.push( new ExtractTextPlugin('styles.[contenthash].css'))
+        config.plugins.push( new ExtractTextPlugin('[name].[contenthash].css'))
     } else {
-        loader = {test: /\.scss$/, loader: 'style!css!postcss!sass'};
+        loader = {test: /\.scss$/, loader: 'isomorphic-style!css!postcss!sass'};
     }
     config.module.loaders.push(loader);
     config.postcss = [

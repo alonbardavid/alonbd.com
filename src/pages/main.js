@@ -5,7 +5,7 @@ export default class MainComponent extends  React.Component {
         counter:0
     }
     render() {
-        return <div>
+        return <div id="main">
             <button onClick={()=>this.setState({counter:this.state.counter+ 1})}>click me!</button>
             <div>Counter: {this.state.counter}</div>
             <div><a href="/about">go to about!</a></div>

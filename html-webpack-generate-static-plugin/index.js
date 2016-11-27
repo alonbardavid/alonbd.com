@@ -13,6 +13,9 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
     compiler.plugin('compilation', function(compilation) {
         compilation.plugin('html-webpack-plugin-after-html-processing', function(htmlPluginData, callback) {
 
+            if (compilation.errors && compilation.errors.length > 0){
+                return callback(null,htmlPluginData);
+            }
             function getSource(filename){
                 return compilation.assets[filename].source();
             }
@@ -30,15 +33,37 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
             });
             var modules = mainEntries.map(getSource).concat(extraModules.map(getSource));
             var code =["var window = global;\n"].concat(modules).join(";\n");
-            var generateFunction = evaluate(code);
+            try {
+                var generateFunction = evaluate(code);
+            }catch (e){
+                return Promise.reject(e);
+            }
             var promises = self.options.routes.map(function(route){
-                var filename = _.endsWith(route,"/")?route + "index.html" : route;
+                if (typeof route == 'string'){
+                    route = {path:route};
+                }
+                var filename = _.endsWith(route.path,"/")?route.path + "index.html" : route.path;
                 filename = _.endsWith(filename,".html")?filename: filename + ".html";
-                var result = generateFunction({path:route});
+                try {
+                    var result = generateFunction({path: route.path});
+                }catch(e){
+                    return Promise.reject(e);
+                }
                 return (result.then ? result: Promise.resolve(result)).then(function(generated){
                     _.forOwn(generated,function(value,key) {
                         var regex = new RegExp("(<[^s]+\\s+id=[\"|']"+ key + "[\"|'][^>]*>)");
                         var htmlResult= rawHtml.replace(regex,"$1" + value);
+                        if (route.include){
+                            route.include.forEach(function(chunkName){
+                                var chunk = _.find(compilation.chunks,function(chunk){return chunk.name == chunkName});
+                                chunk.files.forEach(function(file){
+                                    if (_.endsWith(file,".js")){
+                                        var lastEntryRegex = new RegExp('(src="\\/'+ _.last(mainEntries) + '"><\\/script>)');
+                                        htmlResult = htmlResult.replace(lastEntryRegex,'$1<script src="/' + chunk.files[0] + '"></script>');
+                                    }
+                                });
+                            });
+                        }
                         if (filename == htmlPluginData.plugin.options.filename){
                             htmlPluginData.html = htmlResult;
                         } else {

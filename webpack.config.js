@@ -32,12 +32,13 @@ config.resolve = {
   }
 };
 config.entry = {
-  main: ['./src/main.js']
+  entry: ['./src/entry.js']
 };
 
 config.output = {
   filename: '[name].js',
   path: path.resolve('./target'),
+  chunkFilename:"[name].[chunkhash].js",
   publicPath: '/',
   libraryTarget:"umd"
 };
@@ -60,7 +61,7 @@ config.plugins.push(
 )
 config.plugins.push(
     new HtmlWebPackGenerateStaticPlugin({
-        routes: ['/','/about/','/about2/']
+        routes: [{path:'/',include:["pages/main.js"]},'/about','/about2']
     })
 );
 
