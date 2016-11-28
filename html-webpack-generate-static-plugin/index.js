@@ -1,5 +1,6 @@
 var evaluate = require('eval');
 var _ = require('lodash');
+var Bluebird = require('bluebird');
 var WebpackSources = require('webpack-sources');
 
 function HtmlWebpackGenerateStaticPlugin(options) {
@@ -36,7 +37,7 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
             try {
                 var generateFunction = evaluate(code);
             }catch (e){
-                return Promise.reject(e);
+                return Bluebird.reject(e);
             }
             var promises = self.options.routes.map(function(route){
                 if (typeof route == 'string'){
@@ -47,9 +48,9 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                 try {
                     var result = generateFunction({path: route.path});
                 }catch(e){
-                    return Promise.reject(e);
+                    return Bluebird.reject(e);
                 }
-                return (result.then ? result: Promise.resolve(result)).then(function(generated){
+                return Bluebird.resolve(result).timeout(2000).then(function(generated){
                     _.forOwn(generated,function(value,key) {
                         var regex = new RegExp("(<[^s]+\\s+id=[\"|']"+ key + "[\"|'][^>]*>)");
                         var htmlResult= rawHtml.replace(regex,"$1" + value);
@@ -72,7 +73,7 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                     })
                 })
             });
-            Promise.all(promises).then(callback.bind(null,null,htmlPluginData));
+            Promise.all(promises).then(callback.bind(null,null,htmlPluginData)).catch(callback.bind(null));
         });
     });
 

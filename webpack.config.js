@@ -23,7 +23,7 @@ if (process.env.BUILD_TASK == "profile" ) {
     require('./webpack/profile')(config);
 }
 config.resolve = {
-  extensions: ['', '.js'],
+  extensions: ['', '.js','.md'],
   modulesDirectories: ['node_modules'],
   root: path.resolve('.'),
   alias: {

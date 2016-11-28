@@ -5,9 +5,9 @@ import crossroads from 'crossroads';
 import './style.scss';
 
 let render = function(path){
-    return require(`promise?global,pages\/[filename]!./pages/${path}.js`)().then(({default:component})=>{
+    return require(`promise?global,pages\/[filename]!./pages/${path}`)().then(args=>{
         ReactDOM.render(
-            React.createElement(component),
+            React.createElement(args.default || args),
             document.getElementById('root')
         );
     });
@@ -19,10 +19,10 @@ if (typeof document == 'undefined') {
     }
     module.exports = function render(locals) {
         crossroads.parse(locals.path);
-        return require(`promise?global,pages\/[filename]!./pages/${currentPath}.js`)()
-            .then(({default:component})=>{
+        return require(`promise?global,pages\/[filename]!./pages/${currentPath}`)()
+            .then(args=>{
                 return {
-                    root:ReactDOMServer.renderToString(React.createElement(component))
+                    root:ReactDOMServer.renderToString(React.createElement(args.default || args))
                 };
             });
     };
