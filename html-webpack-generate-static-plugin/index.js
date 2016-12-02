@@ -37,7 +37,7 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
             try {
                 var generateFunction = evaluate(code);
             }catch (e){
-                return Bluebird.reject(e);
+                return Bluebird.reject(new Error("failed to execute bundle on server with error - " + e.message));
             }
             var promises = self.options.routes.map(function(route){
                 if (typeof route == 'string'){
@@ -56,7 +56,10 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                         var htmlResult= rawHtml.replace(regex,"$1" + value);
                         if (route.include){
                             route.include.forEach(function(chunkName){
-                                var chunk = _.find(compilation.chunks,function(chunk){return chunk.name == chunkName});
+                                var chunk = _.find(compilation.chunks,function(chunk){return chunk.name.indexOf(chunkName) >= 0});
+                                if (!chunk){
+                                    throw new Error("could not find file to include - " + chunkName);
+                                }
                                 chunk.files.forEach(function(file){
                                     if (_.endsWith(file,".js")){
                                         var lastEntryRegex = new RegExp('(src="\\/'+ _.last(mainEntries) + '"><\\/script>)');

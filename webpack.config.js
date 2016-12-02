@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebPackGenerateStaticPlugin = require('./html-webpack-generate-static-plugin');
 const config = module.exports = {
   entry: {
     main:[]
@@ -59,12 +58,6 @@ config.plugins.push(
         }
     })
 )
-config.plugins.push(
-    new HtmlWebPackGenerateStaticPlugin({
-        routes: [{path:'/',include:["pages/main.js"]},{path:'/about',include:["pages/about.md"]},{path:'/about2',include:["pages/about2.js"]}]
-    })
-);
-
 
 if (process.env.NODE_ENV == "production") {
   config.devtool = 'source-map';
