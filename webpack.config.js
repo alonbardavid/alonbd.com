@@ -61,7 +61,7 @@ config.plugins.push(
 )
 config.plugins.push(
     new HtmlWebPackGenerateStaticPlugin({
-        routes: [{path:'/',include:["pages/main.js"]},'/about','/about2']
+        routes: [{path:'/',include:["pages/main.js"]},{path:'/about',include:["pages/about.md"]},{path:'/about2',include:["pages/about2.js"]}]
     })
 );
 
@@ -79,15 +79,15 @@ if (process.env.NODE_ENV == "production") {
       name: 'vendor',
       minChunks: Infinity
     }),
-    new webpack.optimize.DedupePlugin()
-    // new webpack.optimize.UglifyJsPlugin({
-    //   mangle: true,
-    //   compress: {
-    //     dead_code: true, // eslint-disable-line camelcase
-    //     screw_ie8: true, // eslint-disable-line camelcase
-    //     unused: true,
-    //     warnings: false
-    //   }
-    // })
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: true,
+      compress: {
+        dead_code: true, // eslint-disable-line camelcase
+        screw_ie8: true, // eslint-disable-line camelcase
+        unused: true,
+        warnings: false
+      }
+    })
   );
 }
