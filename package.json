@@ -17,13 +17,11 @@
     "node": ">=5.11"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --display-chunks --progress --bail",
+    "build": "cross-env NODE_ENV=production BUILD_TASK=build webpack --display-chunks --progress --bail",
     "profile-size": "cross-env NODE_ENV=production BUILD_TASK=profile webpack --profile --json |  webpack-bundle-size-analyzer",
     "clean": "del-cli ./target",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --watch-poll",
-    "lint": "eslint -c .eslintrc.yml *.js ./src ./server",
+    "dev": "cross-env NODE_ENV=development BUILD_TASK=dev webpack-dev-server --progress --watch-poll",
     "prebuild": "npm run clean",
-    "server": "cross-env NODE_ENV=development nodemon -w 'server/**/*.*' ./server/main.js",
     "start": "npm run dev"
   },
   "dependencies": {

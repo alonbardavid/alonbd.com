@@ -1,56 +1,28 @@
 const path = require('path');
 const webpack = require('webpack');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const config = module.exports = {
-  entry: {
-    main:[]
-  },
-  module: {
-    loaders:[]
-  },
-  output: {},
-  plugins: []
+    entry: {
+        entry: ['./src/entry.js']
+    },
+    module: {
+        loaders:[]
+    },
+    output: {
+        filename: '[name].js',
+        path: path.resolve('./target'),
+        chunkFilename:"[name].[chunkhash].js",
+        publicPath: '/',
+        libraryTarget:"umd"
+    },
+    plugins: [],
+    resolve: {
+        extensions: [''],
+        modulesDirectories: ['node_modules'],
+        root: path.resolve('.'),
+        alias: {}
+    }
 };
-require('./webpack/scripts')(config);
-require('./webpack/stylesheets')(config);
-require('./webpack/static')(config);
-if (process.env.NODE_ENV == "development") {
-  require('./webpack/development')(config);
-}
-if (process.env.BUILD_TASK == "profile" ) {
-    require('./webpack/profile')(config);
-}
-config.resolve = {
-  extensions: ['', '.js','.md'],
-  modulesDirectories: ['node_modules'],
-  root: path.resolve('.'),
-  alias: {
-    'react': 'preact-compat',
-    'react-dom': 'preact-compat'
-  }
-};
-config.entry = {
-  entry: ['./src/entry.js']
-};
-
-config.output = {
-  filename: '[name].js',
-  path: path.resolve('./target'),
-  chunkFilename:"[name].[chunkhash].js",
-  publicPath: '/',
-  libraryTarget:"umd"
-};
-
-config.plugins.push(
-  new HtmlWebpackPlugin({
-    filename:"/index.html",
-    chunkSortMode: 'dependency',
-    hash: false,
-    inject: 'body',
-    template: './src/index.html'
-  })
-);
 config.plugins.push(
     new webpack.DefinePlugin({
         'process.env':{
@@ -59,28 +31,17 @@ config.plugins.push(
     })
 )
 
+require('./webpack/scripts')(config);
+require('./webpack/stylesheets')(config);
+require('./webpack/static')(config);
+if (process.env.NODE_ENV == "development") {
+    require('./webpack/development')(config);
+}
+if (process.env.BUILD_TASK == "profile" ) {
+    require('./webpack/profile')(config);
+}
+
 if (process.env.NODE_ENV == "production") {
-  config.devtool = 'source-map';
-
-  config.entry.vendor = './src/vendor.js';
-
-  config.output.filename = '[name].[chunkhash].js';
-
-  config.plugins.push(
-    new WebpackMd5Hash(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: {
-        dead_code: true, // eslint-disable-line camelcase
-        screw_ie8: true, // eslint-disable-line camelcase
-        unused: true,
-        warnings: false
-      }
-    })
-  );
+    config.devtool = 'source-map';
+    require('./webpack/optimization')(config);
 }
