@@ -5,7 +5,7 @@ module.exports = function(config){
     const PORT = process.env.PORT || 3000;
     config.devtool = 'source-map';
 
-    config.entry.main.unshift(
+    config.entry.entry.unshift(
         `webpack-dev-server/client?http://${HOST}:${PORT}`,
         'webpack/hot/only-dev-server',
         'react-hot-loader/patch',

@@ -25,6 +25,7 @@ function configHtmlTemplate(config){
     config.plugins.push(
         new HtmlWebpackPlugin({
             filename:"/index.html",
+            excludeChunks: ['server'],
             chunkSortMode: 'dependency',
             hash: false,
             inject: 'body',
@@ -33,6 +34,7 @@ function configHtmlTemplate(config){
     );
 }
 function configStaticGeneration(config ){
+    config.entry['server'] = ['./src/server-entry.js'];
     var meta = require('../src/metadata');
     var pages = Object.keys(meta.pages).map(function(p){
         return {
@@ -42,7 +44,8 @@ function configStaticGeneration(config ){
     });
     config.plugins.push(
         new HtmlWebPackGenerateStaticPlugin({
-            routes: pages
+            routes: pages,
+            excludeChunk:/^entry/
         })
     );
 }

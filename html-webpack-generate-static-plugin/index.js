@@ -38,7 +38,11 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                     return false;
                 }
             });
-            var modules = mainEntries.map(getSource).concat(extraModules.map(getSource));
+            var moduleNames = mainEntries.concat(extraModules);
+            moduleNames = moduleNames.filter(function(m){
+                return !self.options.excludeChunk || !m.match(self.options.excludeChunk);
+            });
+            var modules = moduleNames.map(getSource);
             var code =["var window = global;\n"].concat(modules).join(";\n");
             try {
                 var generateFunction = evaluate(code);
