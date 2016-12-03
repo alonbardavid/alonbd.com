@@ -32,8 +32,8 @@
     "preact": "^6.4.0",
     "preact-compat": "^3.9.2",
     "react": "~15.2.0",
-    "react-dom": "~15.2.0",
-    "react-helmet": "^3.2.2"
+    "react-document-meta": "^2.1.1",
+    "react-dom": "~15.2.0"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.6",

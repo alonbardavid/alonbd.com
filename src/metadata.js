@@ -7,7 +7,7 @@ module.exports = {
         "about": {
             "title":"About"
         },
-        "main": {
+        "index": {
             "title":""
         }
     }

@@ -8,7 +8,13 @@ function HtmlWebpackGenerateStaticPlugin(options) {
         routes:[]
     },options);
 }
-
+function filenameTransform(path){
+    if (_.endsWith(path,"index")){
+        return path + ".html";
+    }
+    var filename = path.lastIndexOf(".") > path.lastIndexOf("/")? path : path + "/index.html";
+    return filename;
+}
 HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
     var self = this;
     compiler.plugin('compilation', function(compilation) {
@@ -43,37 +49,38 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                 if (typeof route == 'string'){
                     route = {path:route};
                 }
-                var filename = _.endsWith(route.path,"/")?route.path + "index.html" : route.path;
-                filename = _.endsWith(filename,".html")?filename: filename + ".html";
+                var filename = filenameTransform(route.path);
                 try {
                     var result = generateFunction({path: route.path});
                 }catch(e){
                     return Bluebird.reject(e);
                 }
                 return Bluebird.resolve(result).timeout(2000).then(function(generated){
+                    var htmlResult = rawHtml;
                     _.forOwn(generated,function(value,key) {
-                        var regex = new RegExp("(<[^s]+\\s+id=[\"|']"+ key + "[\"|'][^>]*>)");
-                        var htmlResult= rawHtml.replace(regex,"$1" + value);
-                        if (route.include){
-                            route.include.forEach(function(chunkName){
-                                var chunk = _.find(compilation.chunks,function(chunk){return chunk.name.indexOf(chunkName) >= 0});
-                                if (!chunk){
-                                    throw new Error("could not find file to include - " + chunkName);
+                        var regex = new RegExp("(<[^s]+\\s+id=[\"|']" + key + "[\"|'][^>]*>)");
+                        htmlResult= htmlResult.replace(regex, "$1" + value);
+                    });
+                    if (route.include){
+                        route.include.forEach(function(chunkName){
+                            var chunk = _.find(compilation.chunks,function(chunk){return chunk.name.indexOf(chunkName) >= 0});
+                            if (!chunk){
+                                throw new Error("could not find file to include - " + chunkName);
+                            }
+                            chunk.files.forEach(function(file){
+                                if (_.endsWith(file,".js")){
+                                    var lastEntryRegex = new RegExp('(src="\\/'+ _.last(mainEntries) + '"><\\/script>)');
+                                    htmlResult = htmlResult.replace(lastEntryRegex,'$1<script src="/' + chunk.files[0] + '"></script>');
                                 }
-                                chunk.files.forEach(function(file){
-                                    if (_.endsWith(file,".js")){
-                                        var lastEntryRegex = new RegExp('(src="\\/'+ _.last(mainEntries) + '"><\\/script>)');
-                                        htmlResult = htmlResult.replace(lastEntryRegex,'$1<script src="/' + chunk.files[0] + '"></script>');
-                                    }
-                                });
                             });
-                        }
-                        if (filename == htmlPluginData.plugin.options.filename){
-                            htmlPluginData.html = htmlResult;
-                        } else {
-                            compilation.assets[filename] = new WebpackSources.RawSource(htmlResult);
-                        }
-                    })
+                        });
+                    }
+                    if (filename == htmlPluginData.plugin.options.filename ||
+                        "/" + filename == htmlPluginData.plugin.options.filename){
+                        htmlPluginData.html = htmlResult;
+                    } else {
+                        compilation.assets[filename] = new WebpackSources.RawSource(htmlResult);
+                    }
                 })
             });
             Promise.all(promises).then(callback.bind(null,null,htmlPluginData)).catch(callback.bind(null));

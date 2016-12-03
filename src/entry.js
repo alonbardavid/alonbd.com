@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import crossroads from 'crossroads';
 import './style.scss';
+import DocumentHead from 'react-document-meta';
+import Root from './base/root';
 import metadata from './metadata';
 
 const pages = require.context('bundle-loader?lazy&name=[path][name]!./pages',true,/.*/);
@@ -14,8 +16,9 @@ function getPage(path){
 }
 let render = function(path){
     return getPage(`./${path}`).then(args=>{
+        const Component = args.default || args;
         ReactDOM.render(
-            React.createElement(args.default || args),
+            <Root meta={metadata.pages[path]}><Component></Component></Root>,
             document.getElementById('root')
         );
     });
@@ -28,8 +31,10 @@ if (typeof document == 'undefined') {
     module.exports = function render(locals) {
         crossroads.parse(locals.path);
         return getPage(`./${currentPath}`).then(args=>{
-                return {
-                    root:ReactDOMServer.renderToString(React.createElement(args.default || args))
+            const Component = args.default || args;
+            return {
+                    root:ReactDOMServer.renderToString(<Root meta={metadata.pages[locals.path]}><Component></Component></Root>),
+                    head: DocumentHead.renderAsHTML()
                 };
             });
     };
