@@ -1,14 +1,5 @@
 import React from 'react';
-
-export default class MainComponent extends  React.Component {
-    state = {
-        counter:0
-    }
-    render() {
-        return <div id="main">
-            <button onClick={()=>this.setState({counter:this.state.counter+ 1})}>click me!</button>
-            <div>Counter: {this.state.counter}</div>
-            <div><a href="/about">go to about!</a></div>
-        </div>
-    }
+import './index.scss';
+export default function MainComponent(props){
+    return <section class="content"></section>
 }

@@ -1,0 +1,40 @@
+
+$avatar-width: 75px;
+$avatar-height: 85px;
+$footer-height:200px;
+footer {
+  display:block;
+  width:100%;
+  background-color: #dddddd;
+  height: $footer-height;
+
+  > .container {
+    display:flex;
+  }
+  .footer-section {
+    display:inline-block;
+    vertical-align: text-top;
+    width:50%;
+    margin:10px;
+    border-right: 1px solid #BBBBBB;
+
+    &:last-child {
+      border-right:none;
+    }
+  }
+
+  .footer-hello {
+    display:inline-flex;
+  }
+  .avatar-container {
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right:20px;
+  }
+  .avatar {
+    width:$avatar-width;
+    height:$avatar-height;
+  }
+}

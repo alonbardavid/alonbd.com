@@ -13,7 +13,7 @@ module.exports = function(config){
     );
 
     config.devServer = {
-        contentBase: './src',
+        contentBase: './',
         historyApiFallback: true,
         host: HOST,
         hot: true,

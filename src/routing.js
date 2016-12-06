@@ -19,10 +19,14 @@ function overrideLinkAction(){
             crossroads.parse(document.location.pathname + document.location.search);
         })
         document.addEventListener('click',(event)=>{
-            if (event.target.tagName.toLowerCase() == 'a') {
-                event.preventDefault();
-                window.history.pushState(null,null,event.target.href);
-                window.dispatchEvent(new Event('changestate'));
+            if (event.target.tagName.toLowerCase() == 'a' ||
+                event.target.parentElement.tagName.toLowerCase() == 'a') {
+                var href = event.target.href || event.target.parentElement.href;
+                if (href.indexOf(window.location.origin) ==0){
+                    event.preventDefault();
+                    window.history.pushState(null,null,href);
+                    window.dispatchEvent(new Event('changestate'));
+                }
             }
         })
     }
@@ -33,7 +37,7 @@ if (typeof document !== 'undefined') {
 export function getComponent(path) {
     return getPage(`./${path}`).then(args=>{
         const Component = args.default || args;
-        return <Root meta={metadata.pages[path]}><Component></Component></Root>;
+        return <Root meta={metadata.pages[path]} path={path}><Component></Component></Root>;
     });
 }
 export function setRouteHandler(render){

@@ -2,7 +2,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const webpack = require('webpack');
 
 module.exports = function(config) {
-    config.entry.vendor = './src/vendor.js';
+    config.entry.vendor = './vendor.js';
 
     config.output.filename = '[name].[chunkhash].js';
 

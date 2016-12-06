@@ -11,7 +11,9 @@ module.exports = function(config){
 };
 function configBinaryFiles(config){
     config.module.loaders.push(
-        { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader' }
+        {test: /\.(woff|eot|ttf)$/, loader: 'file-loader?name=[path][name].[hash].[ext]' },
+        {test: /\.(woff2)$/, loader: 'url-loader' },
+        {test: /\.(jpg|png|svg)/,loader:'file-loader?name=[path][name].[hash].[ext]'}
     );
 }
 function configMarkdown(config){
@@ -29,12 +31,12 @@ function configHtmlTemplate(config){
             chunkSortMode: 'dependency',
             hash: false,
             inject: 'body',
-            template: './src/index.html'
+            template: './index.html'
         })
     );
 }
 function configStaticGeneration(config ){
-    config.entry['server'] = ['./src/server-entry.js'];
+    config.entry['server'] = ['./server-entry.js'];
     var meta = require('../src/metadata');
     var pages = Object.keys(meta.pages).map(function(p){
         return {

@@ -1,3 +1,54 @@
+@import 'fonts.css';
+$footer-height:200px;
+
 body {
-  background-color: teal;
+  font-family: "Lato", "Helvetica","Arial";
+  margin:0;
+}
+.menu {
+  position: fixed;
+  left:0;
+
+  nav {
+    display:block;
+
+    .nav-item {
+      display:block;
+    }
+
+  }
+  .avatar,.title {
+    transition: transform 0.2s ease-in-out;
+  }
+  .nav-item {
+    transition: transform 0.2s ease-in-out;
+    &:nth-child(1) {
+      transition: transform 0.2s ease-in-out;
+      transition-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      transition: transform 0.2s ease-in-out;
+      transition-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      transition: transform 0.2s ease-in-out;
+      transition-delay: 0.3s;
+    }
+    &:nth-child(4) {
+      transition: transform 0.2s ease-in-out;
+      transition-delay: 0.4s;
+    }
+  }
+}
+#main-content {
+  min-height: calc(100vh - #{$footer-height});
+}
+.container {
+  margin-left: 200px;
+  width:700px;
+}
+
+a {
+  text-decoration: none;
+  color:inherit;
 }

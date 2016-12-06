@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 const config = module.exports = {
+    context: path.resolve('./src'),
     entry: {
-        entry: ['./src/entry.js']
+        entry: ['./entry.js']
     },
     module: {
         loaders:[]
