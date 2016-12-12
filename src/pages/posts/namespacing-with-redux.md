@@ -1,4 +1,4 @@
-## Multiple sites with MVC 5!
+## Namespacing with Redux
 
 ### Summary
 To 

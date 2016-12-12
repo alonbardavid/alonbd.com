@@ -1,0 +1,14 @@
+$footer-height:200px;
+
+.loaderPage {
+  width: 100%;
+  height: calc(100vh - #{$footer-height});
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 15vw;
+    height: 15vw;
+  }
+}

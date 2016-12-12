@@ -1,12 +1,23 @@
 import ReactDOM from 'react-dom';
-import {getComponent,setRouteHandler,startRouting} from './routing';
+import {getComponent,getOnPathLoadComponent,setRouteHandler,startRouting} from './routing';
 
+var lastComponent;
+var rootElem = document.getElementById('root');
+function renderComponent(Component){
+    ReactDOM.render(
+        Component,
+        rootElem
+    );
+}
 function render(path){
-    return getComponent(path).then(Component=>{
-        ReactDOM.render(
-            Component,
-            document.getElementById('root')
-        );
+    let timeout = setTimeout(()=>{
+        lastComponent && renderComponent(getOnPathLoadComponent(lastComponent,path));
+    },100);
+    return getComponent(path,lastComponent).then(result=>{
+        clearTimeout(timeout);
+        const {Component,toRender} = result;
+        lastComponent = Component;
+        renderComponent(toRender);
     })
 }
 setRouteHandler(render);

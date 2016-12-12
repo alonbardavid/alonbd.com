@@ -12,6 +12,11 @@ var metadata =module.exports = {
             "tags":[".net","MVC","C#","Entity Framework","Programming"],
             "route":"posts/multiple_sites_with_mvc_5"
         },
+        "posts/namespacing-with-redux":{
+            "title":"Namespacing with Redux",
+            "tags":["js","redux","project","Programming"],
+            "route":"posts/namespacing-with-redux"
+        },
         "blog":{
             "title":"Blog",
             "route":"blog"
