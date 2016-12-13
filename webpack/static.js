@@ -5,7 +5,7 @@ module.exports = function(config){
     configBinaryFiles(config);
     configMarkdown(config);
     configHtmlTemplate(config);
-    if (process.env.NODE_ENV == "production") {
+    if (process.env.BUILD_TASK == "build") {
         configStaticGeneration(config);
     }
 };
@@ -39,6 +39,9 @@ function configStaticGeneration(config ){
     config.entry['server'] = ['./server-entry.js'];
     var meta = require('../src/metadata');
     var pages = Object.keys(meta.pages).map(function(p){
+        if (p == "index"){
+            return {path:p}
+        }
         return {
             path:p,
             include:["pages/" + p]
@@ -47,7 +50,7 @@ function configStaticGeneration(config ){
     config.plugins.push(
         new HtmlWebPackGenerateStaticPlugin({
             routes: pages,
-            excludeChunk:/^entry/
+            exclude:['entry']
         })
     );
 }

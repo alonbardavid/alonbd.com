@@ -3,7 +3,7 @@ import avatar from '../img/avatar.png';
 import metadata from '../metadata';
 import './footer.scss';
 
-export default function(){
+export default function FooterComponent(){
     return <footer>
         <div className="container">
             <div className="footer-section footer-hello">
@@ -20,14 +20,12 @@ export default function(){
             </div>
             <div className="footer-section">
                 <h2>AROUND THE WEB</h2>
-                <p>
-                    You can find me at the following places:
-                    <ul>
-                        {metadata.aroundTheWeb.map(link=>
-                            <li><a href={link.url}>{link.title}</a></li>
-                        )}
-                    </ul>
-                </p>
+                You can find me at the following places:
+                <ul>
+                    {metadata.aroundTheWeb.map((link,i)=>
+                        <li key={i}><a href={link.url}>{link.title}</a></li>
+                    )}
+                </ul>
             </div>
         </div>
     </footer>

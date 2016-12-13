@@ -45,6 +45,7 @@ $avatar-height: 85px;
 
   &.full-screen {
     width:100%;
+    position: relative;
 
     .logo {
       width:50vw;
@@ -52,16 +53,7 @@ $avatar-height: 85px;
 
     }
     nav {
-      #nav-projects,#nav-blog {
-        position: absolute;
-        margin-top:20px;
-      }
-      #nav-projects {
-        left:40vw;
-      }
-      #nav-blog {
-        right:40vw;
-      }
+      display:none;
 
     }
   }

@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production BUILD_TASK=build webpack --display-chunks --progress --bail",
+    "build-dev": "cross-env NODE_ENV=development BUILD_TASK=build webpack --display-chunks --progress --bail",
     "profile-size": "cross-env NODE_ENV=production BUILD_TASK=profile webpack --profile --json |  webpack-bundle-size-analyzer",
     "clean": "del-cli ./target",
     "dev": "cross-env NODE_ENV=development BUILD_TASK=dev webpack-dev-server --progress --watch-poll",
@@ -31,6 +32,7 @@
     "inferno-compat": "^1.0.0-beta32",
     "inferno-server": "^1.0.0-beta32",
     "lodash": "^4.14.2",
+    "normalize.css": "^5.0.0",
     "react": "~15.2.0",
     "react-document-meta": "^2.1.1",
     "react-dom": "~15.2.0"

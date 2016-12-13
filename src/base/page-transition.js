@@ -4,11 +4,8 @@ import ReactDOM from 'react-dom';
 
 export default class PageTransition extends React.Component {
 
-    componentWillMount() {
-        this.setState({Current: this.props.children});
-    }
     componentWillReceiveProps(newProps){
-        this.setState({Current: newProps.children,Prev: this.props.children});
+        this.setState({Prev: this.props.children});
     }
     componentDidUpdate(){
         const wrapperNode = ReactDOM.findDOMNode(this);
@@ -28,7 +25,7 @@ export default class PageTransition extends React.Component {
                 ...Array.prototype.map.call(currentNode.childNodes, elem=>({
                     element: elem,
                     duration: 20,
-                    delay: i++ * 20
+                    delay: i++ * 20 + 100
                 }))
             ]);
             prevNode.classList.add('page-transition-out-start');
@@ -53,10 +50,10 @@ export default class PageTransition extends React.Component {
         }
     }
     render(){
-        const {Current,Prev} = this.state;
+        const {Prev} = this.state;
         return <div id="page-transition-container">
             {Prev && Prev}
-            {Current}
+            {this.props.children}
         </div>;
     }
 }

@@ -19,16 +19,20 @@ function overrideLinkAction(){
         });
         window.addEventListener('changestate',()=>{
             crossroads.parse(document.location.pathname + document.location.search);
-        })
+        });
         document.addEventListener('click',(event)=>{
-            if (event.target.tagName.toLowerCase() == 'a' ||
-                event.target.parentElement.tagName.toLowerCase() == 'a') {
-                var href = event.target.href || event.target.parentElement.href;
-                if (href.indexOf(window.location.origin) ==0){
-                    event.preventDefault();
-                    window.history.pushState(null,null,href);
-                    window.dispatchEvent(new Event('changestate'));
+            var node = event.target;
+            while(node){
+                if (node.tagName == 'A') {
+                    var href = node.href;
+                    if (href.indexOf(window.location.origin) ==0){
+                        event.preventDefault();
+                        window.history.pushState(null,null,href);
+                        window.dispatchEvent(new Event('changestate'));
+                    }
+                    return;
                 }
+                node = node.parentElement;
             }
         })
     }
@@ -36,21 +40,24 @@ function overrideLinkAction(){
 if (typeof document !== 'undefined') {
     overrideLinkAction();
 }
-export function getOnPathLoadComponent(Component,path){
+export function getOnPathLoadComponent(path){
+    if (/\/$/.test(path)) {
+        path = path.substr(0,path.length - 1);
+    }
     return <Root meta={metadata.pages[path]} path={path}>
         <div className="loaderPage"><Loader></Loader></div>
     </Root>
 }
-export function getComponent(path,OldComponent) {
+export function getComponent(path) {
+    if (/\/$/.test(path)) {
+        path = path.substr(0,path.length - 1);
+    }
     return getPage(`./${path}`).then(args=>{
         const Component = args.default || args;
 
-        return {
-            Component,
-            toRender:<Root meta={metadata.pages[path]} path={path}>
-                <Component></Component>
-            </Root>
-        }
+        return <Root meta={metadata.pages[path]} path={path}>
+            <Component></Component>
+        </Root>
     });
 }
 export function setRouteHandler(render){

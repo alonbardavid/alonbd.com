@@ -9,21 +9,25 @@ var metadata =module.exports = {
     pages: {
         "posts/multiple_sites_with_mvc_5":{
             "title":"Multiple sites with MVC5",
-            "tags":[".net","MVC","C#","Entity Framework","Programming"],
-            "route":"posts/multiple_sites_with_mvc_5"
+            "description":"A simple way to work with multiple whitelabel sites in ASP.net, ",
+            "tags":[".net","MVC","C#","Entity Framework","ASP","Programming"],
+            "route":"posts/multiple_sites_with_mvc_5/",
+            "publishDate":"2016-11-12T00:00:00.000Z"
         },
         "posts/namespacing-with-redux":{
             "title":"Namespacing with Redux",
+            "description":"How to namespace with redux!",
             "tags":["js","redux","project","Programming"],
-            "route":"posts/namespacing-with-redux"
+            "route":"posts/namespacing-with-redux/",
+            "publishDate":"2016-12-13T00:00:00.000Z"
         },
         "blog":{
             "title":"Blog",
-            "route":"blog"
+            "route":"blog/"
         },
         "about": {
             "title":"About",
-            "route":"about"
+            "route":"about/"
         },
         "index": {
             "title":"",

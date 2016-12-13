@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import {getComponent,getOnPathLoadComponent,setRouteHandler,startRouting} from './routing';
 
-var lastComponent;
+var firstRun = true;
 var rootElem = document.getElementById('root');
 function renderComponent(Component){
     ReactDOM.render(
@@ -10,14 +10,16 @@ function renderComponent(Component){
     );
 }
 function render(path){
-    let timeout = setTimeout(()=>{
-        lastComponent && renderComponent(getOnPathLoadComponent(lastComponent,path));
-    },100);
-    return getComponent(path,lastComponent).then(result=>{
-        clearTimeout(timeout);
-        const {Component,toRender} = result;
-        lastComponent = Component;
-        renderComponent(toRender);
+    var timeout;
+    if (!firstRun) {
+        timeout = setTimeout(()=> {
+            renderComponent(getOnPathLoadComponent( path));
+        }, 100);
+    }
+    return getComponent(path).then(Component=>{
+        timeout && clearTimeout(timeout);
+        firstRun = false;
+        renderComponent(Component);
     })
 }
 setRouteHandler(render);

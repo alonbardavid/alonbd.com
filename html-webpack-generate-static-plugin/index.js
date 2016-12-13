@@ -23,26 +23,20 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
             if (compilation.errors && compilation.errors.length > 0){
                 return callback(null,htmlPluginData);
             }
-            function getSource(filename){
+            function getSource(chunk){
+                var filename = chunk.files[0];
                 return compilation.assets[filename].source();
             }
             var rawHtml = htmlPluginData.html;
-
             var mainEntries = htmlPluginData.assets.js.map(function(js){
                 return js.substr(1);
             });
-            var extraModules =   _.keys(compilation.assets).filter(function(filename){
-                if (_.endsWith(filename,".js") && mainEntries.indexOf(filename) < 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            var moduleNames = mainEntries.concat(extraModules);
-            moduleNames = moduleNames.filter(function(m){
-                return !self.options.excludeChunk || !m.match(self.options.excludeChunk);
-            });
-            var modules = moduleNames.map(getSource);
+            var chunks = compilation.chunks.filter(function(chunk){
+                return !self.options.exclude || self.options.exclude.indexOf(chunk.name) < 0
+            }).sort(function(a,b){
+                return b.entry || b.id > a.id;
+            })
+            var modules = chunks.map(getSource);
             var code =["var window = global;\n"].concat(modules).join(";\n");
             try {
                 var generateFunction = evaluate(code);

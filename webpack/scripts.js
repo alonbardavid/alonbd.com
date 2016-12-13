@@ -7,4 +7,8 @@ module.exports = function(config){
     config.resolve.alias['react-dom'] = 'inferno-compat';
     config.resolve.alias['inferno-compat/server'] = 'inferno-server';
 
+    if (process.env.NODE_ENV == 'production'){
+        //config.resolve.alias['inferno'] = 'inferno/dist/inferno.min.js'
+    }
+
 };
