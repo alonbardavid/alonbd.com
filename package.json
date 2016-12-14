@@ -35,7 +35,8 @@
     "normalize.css": "^5.0.0",
     "react": "~15.2.0",
     "react-document-meta": "^2.1.1",
-    "react-dom": "~15.2.0"
+    "react-dom": "~15.2.0",
+    "react-helmet": "^3.2.3"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.6",

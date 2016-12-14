@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(config){
     var loader;
-    if (process.env.BUILD_TASK == "build"){
+    if (process.env.BUILD_TASK == "build" || process.env.NODE_ENV == "production" ){
         loader ={test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass')};
         config.plugins.push( new ExtractTextPlugin('[name].[contenthash].css'))
     } else {

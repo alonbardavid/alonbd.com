@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from './nav';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 import './style.scss';
 import Footer from './footer';
 import PageTransition from './page-transition';
@@ -16,6 +16,7 @@ export default class RootComponent extends React.Component {
         }
         return (<div id={`page-${normalizedPath}`}>
             <Nav path={props.path}></Nav>
+            <Helmet {...meta} />
             <section id="main-content" className="container">
                 <PageTransition>
                     {props.children}

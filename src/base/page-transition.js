@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 export default class PageTransition extends React.Component {
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(){
         this.setState({Prev: this.props.children});
     }
     componentDidUpdate(){
