@@ -1,11 +1,11 @@
 import React from 'react';
 import crossroads from 'crossroads';
-import metadata from './metadata';
-import Root from './base/root';
-import Index from './pages/index';
-import Loader from './base/loader';
+import metadata from '../metadata';
+import Root from 'src/components/root/root';
+import Index from 'src/pages/index';
+import Loader from 'src/components/loader/loader';
 
-const pages = require.context('bundle-loader?lazy&name=[path][name]!./pages',true,/.*/);
+const pages = require.context('bundle-loader?lazy&name=[path][name]!src/pages',true,/.*/);
 
 function getPage(path){
     return new Promise(function(resolve){
@@ -41,20 +41,13 @@ if (typeof document !== 'undefined') {
     overrideLinkAction();
 }
 export function getOnPathLoadComponent(path){
-    if (/\/$/.test(path)) {
-        path = path.substr(0,path.length - 1);
-    }
     return <Root meta={metadata.pages[path]} path={path}>
         <div className="loaderPage"><Loader></Loader></div>
     </Root>
 }
 export function getComponent(path) {
-    if (/\/$/.test(path)) {
-        path = path.substr(0,path.length - 1);
-    }
     return getPage(`./${path}`).then(args=>{
         const Component = args.default || args;
-
         return <Root meta={metadata.pages[path]} path={path}>
             <Component></Component>
         </Root>

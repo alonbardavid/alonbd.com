@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import metadata from '../metadata';
-import BlogSummary from '../components/blog-summary';
+import BlogSummary from '../components/blog-summary/blog-summary';
 import ProjectSummary from '../components/project-summary';
 
 export default function MainComponent(props){

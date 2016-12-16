@@ -1,34 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Logo from '../img/logo.svg';
+import Logo from '../../img/logo.svg';
 import 'FLIP/dist/flip';
 
 import './nav.scss';
 export default class NavComponent extends React.Component {
 
     componentWillReceiveProps (newProps){
-        if (this.props.path != newProps.path){
+        if (this.props.path != newProps.path &&
+            this.props.path == 'index' || newProps.path == 'index'){
+            const node = ReactDOM.findDOMNode(this);
+            const flip = new window.FLIP.group([
+                {element: node.querySelector(".logo"), duration: 300}
+            ]);
+            flip.first();
             if (this.props.path == 'index') {
-                const node = ReactDOM.findDOMNode(this);
-                const flip = new window.FLIP.group([
-                    {element: node.querySelector(".logo"), duration: 300}
-                ]);
-                flip.first();
                 node.classList.remove('full-screen');
-                flip.last();
-                flip.invert();
-                flip.play();
-            } else if (newProps.path == 'index'){
-                const node = ReactDOM.findDOMNode(this);
-                const flip = new window.FLIP.group([
-                    {element: node.querySelector(".logo"), duration: 300}
-                ]);
-                flip.first();
+            } else {
                 node.classList.add('full-screen');
-                flip.last();
-                flip.invert();
-                flip.play();
             }
+            flip.last();
+            flip.invert();
+            flip.play();
         }
     }
     render(){

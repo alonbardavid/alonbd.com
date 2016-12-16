@@ -1,9 +1,9 @@
 import React from 'react';
-import Nav from './nav';
+import Nav from 'src/components/nav/nav';
 import Helmet from 'react-helmet';
-import './style.scss';
-import Footer from './footer';
-import PageTransition from './page-transition';
+import Footer from 'src/components/footer/footer';
+import PageTransition from 'src/components/page-transition';
+import './root.scss';
 
 export default class RootComponent extends React.Component {
 

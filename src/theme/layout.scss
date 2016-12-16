@@ -1,0 +1,14 @@
+@import "~src/theme/variables";
+.menu {
+  position: fixed;
+  width:180px;
+  margin-right:20px;
+  left:0;
+  top: 0;
+}
+#main-content {
+  min-height: calc(100vh - #{$footer-height});
+  position: relative;
+  box-sizing: border-box;
+  padding: 10px;
+}

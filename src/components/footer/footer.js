@@ -1,6 +1,6 @@
 import React from 'react';
-import avatar from '../img/avatar.png';
-import metadata from '../metadata';
+import avatar from '../../img/avatar.png';
+import metadata from '../../metadata';
 import './footer.scss';
 
 export default function FooterComponent(){

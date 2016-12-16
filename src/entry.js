@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import {getComponent,getOnPathLoadComponent,setRouteHandler,startRouting} from './routing';
+import {getComponent,getOnPathLoadComponent,setRouteHandler,startRouting} from 'src/core/routing';
 
 var firstRun = true;
 var rootElem = document.getElementById('root');

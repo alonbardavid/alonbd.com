@@ -1,7 +1,5 @@
+@import '~src/theme/variables';
 
-$avatar-width: 75px;
-$avatar-height: 85px;
-$footer-height:200px;
 footer {
   display:block;
   width:100%;
@@ -34,7 +32,7 @@ footer {
     margin-right:20px;
   }
   .avatar {
-    width:$avatar-width;
-    height:$avatar-height;
+    width:75px;
+    height:85px;;
   }
 }

@@ -1,7 +1,7 @@
 import ReactDOMServer from 'inferno-server';
 import Helmet from 'react-helmet';
 import crossroads from 'crossroads';
-import {getComponent,setRouteHandler} from './routing';
+import {getComponent,setRouteHandler} from 'src/core/routing';
 
 var currentPath = null;
 function setChosenPath(path){
