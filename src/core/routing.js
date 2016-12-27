@@ -46,6 +46,7 @@ export function getOnPathLoadComponent(path){
     </Root>
 }
 export function getComponent(path) {
+    path = path.lastIndexOf("/") == path.length - 1? path.substr(0,path.length-1):path;
     return getPage(`./${path}`).then(args=>{
         const Component = args.default || args;
         return <Root meta={metadata.pages[path]} path={path}>

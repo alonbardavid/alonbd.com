@@ -11,16 +11,16 @@ var metadata =module.exports = {
             "title":"Multiple sites with MVC5",
             "description":"A simple way to work with multiple whitelabel sites in ASP.net, ",
             "tags":[".net","MVC","C#","Entity Framework","ASP","Programming"],
-            "route":"posts/multiple_sites_with_mvc_5",
+            "route":"/posts/multiple_sites_with_mvc_5",
             "publishDate":"2016-11-12T00:00:00.000Z"
         },
         "blog":{
             "title":"Blog",
-            "route":"blog"
+            "route":"/blog"
         },
         "projects":{
             "title":"Projects",
-            "route":"projects"
+            "route":"/projects"
         },
         "index": {
             "title":"",
@@ -29,7 +29,7 @@ var metadata =module.exports = {
     },
     aroundTheWeb: [
         {
-            title:"GitHub profile",
+            title:"GitHub",
             url:"https://github.com/alonbardavid"
         },
         {
