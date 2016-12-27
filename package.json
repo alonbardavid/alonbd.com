@@ -28,6 +28,7 @@
   "dependencies": {
     "FLIP": "github:googlechrome/flipjs",
     "crossroads": "^0.12.2",
+    "highlight.js": "^9.9.0",
     "inferno": "^1.0.0-beta32",
     "inferno-compat": "^1.0.0-beta32",
     "inferno-server": "^1.0.0-beta32",
@@ -57,6 +58,7 @@
     "lodash": "^4.17.2",
     "markdown-it": "^8.1.0",
     "markdown-it-front-matter": "^0.1.2",
+    "markdown-it-highlightjs": "^2.0.0",
     "markdown-it-jsx": "^1.0.0",
     "node-sass": "~3.8.0",
     "npm-run-all": "^3.1.1",

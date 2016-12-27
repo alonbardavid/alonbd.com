@@ -1,5 +1,6 @@
 var markdownIt = require('markdown-it');
 var jsx = require('markdown-it-jsx');
+var markdownItHighlightjs = require('markdown-it-highlightjs');
 var frontMatter = require('markdown-it-front-matter');
 
 
@@ -13,6 +14,7 @@ module.exports = function (source) {
             (res || "").split("\n").join(",") +
              "}";
     });
+    md.use(markdownItHighlightjs,{auto:false});
     var content = md.render(source);
     var res = [
         "var React = require('react');",
