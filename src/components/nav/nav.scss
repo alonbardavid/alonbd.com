@@ -5,6 +5,7 @@
   z-index:10;
   .logo {
     width:100%;
+    margin:5px;
 
     a {
       display: block;
@@ -76,17 +77,21 @@
   }
   &:not(.full-screen) .logo{
     @include respond-to(phones) {
-      a {
-        width: 48px;
-        height: 42px;
-        overflow:hidden;
-      }
       svg {
         height:42px;
         width: auto;
         .text {
-          transform: translateY(-500px);
+          transform: scale(0.3) translate(1000px,1800px);;
         }
+      }
+    }
+  }
+  &.fullscreen-tran-finished {
+    @include respond-to(phones) {
+      a {
+        width: 48px;
+        height: 42px;
+        overflow: hidden;
       }
     }
   }

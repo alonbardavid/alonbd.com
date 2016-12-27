@@ -18,6 +18,10 @@ export default class NavComponent extends React.Component {
                 } else {
                     node.classList.add('full-screen');
                 }
+            }).then(()=>{
+                if (this.props.path != 'index') {
+                    node.classList.add('fullscreen-tran-finished');
+                }
             })
         }
     }
