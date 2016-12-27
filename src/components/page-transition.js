@@ -1,5 +1,5 @@
 import React from 'react';
-import 'FLIP/dist/flip';
+import FLIP from 'src/core/flip';
 import ReactDOM from 'react-dom';
 
 export default class PageTransition extends React.Component {
@@ -17,18 +17,18 @@ export default class PageTransition extends React.Component {
             const prevNode = wrapperNode.childNodes[0];
             const currentNode = wrapperNode.childNodes[1];
             let i = 0;
-
-            const flip = new window.FLIP.group([
+            const transitionDelay = this.state.Prev.type.transition || 100;
+            const flip = new FLIP.group([
                 ...Array.prototype.map.call(prevNode.childNodes, elem=>({
                     element: elem,
                     duration: 20,
                     delay: i++ * 20
                 })),
-                {element:prevNode,duration:20,delay:i*20},
+                {element:prevNode,duration:transitionDelay,delay:i*transitionDelay},
                 ...Array.prototype.map.call(currentNode.childNodes, elem=>({
                     element: elem,
                     duration: 20,
-                    delay: i++ * 20 + 100
+                    delay: i++ * 20 + transitionDelay
                 }))
             ]);
             prevNode.classList.add('page-transition-out-start');

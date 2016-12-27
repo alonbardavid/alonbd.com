@@ -13,7 +13,8 @@ function configBinaryFiles(config){
     config.module.loaders.push(
         {test: /\.(woff|eot|ttf)$/, loader: 'file-loader?name=[path][name].[hash].[ext]' },
         {test: /\.(woff2)$/, loader: 'url-loader' },
-        {test: /\.(jpg|png|svg)/,loader:'file-loader?name=[path][name].[hash].[ext]'}
+        {test: /\.(jpg|png)/,loader:'file-loader?name=[path][name].[hash].[ext]'},
+        {test: /\.svg/,loader:'raw-loader'}
     );
 }
 function configMarkdown(config){

@@ -14,13 +14,6 @@ var metadata =module.exports = {
             "route":"posts/multiple_sites_with_mvc_5",
             "publishDate":"2016-11-12T00:00:00.000Z"
         },
-        "posts/namespacing-with-redux":{
-            "title":"Namespacing with Redux",
-            "description":"How to namespace with redux!",
-            "tags":["js","redux","project","Programming"],
-            "route":"posts/namespacing-with-redux",
-            "publishDate":"2016-12-13T00:00:00.000Z"
-        },
         "blog":{
             "title":"Blog",
             "route":"blog"
@@ -28,10 +21,6 @@ var metadata =module.exports = {
         "projects":{
             "title":"Projects",
             "route":"projects"
-        },
-        "about": {
-            "title":"About",
-            "route":"about"
         },
         "index": {
             "title":"",
@@ -49,7 +38,7 @@ var metadata =module.exports = {
         },
         {
             title:"Stackoverflow",
-            url:"http://stackexchange.com/users/1963675/illniyar"
+            url:"https://stackoverflow.com/users/1764456/alon-bar-david"
         }
     ],
     projects: [

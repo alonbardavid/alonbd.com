@@ -4,10 +4,6 @@
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
 }
-.rotating-logo {
-  animation: spin 2s infinite linear;
-}
-
 .page-transition-out-start,.page-transition-out-end {
   position:absolute;
   left:0px;
@@ -24,11 +20,15 @@
   width: 100%;
   height: calc(100vh - #{$footer-height});
   display: flex;
-  align-items: center;
   justify-content: center;
 
-  img {
-    width: 15vw;
-    height: 15vw;
+  .loader {
+    margin-top: 100px;
+  }
+  svg {
+    width:100%;
+    animation: spin 2s infinite linear;
+
+
   }
 }

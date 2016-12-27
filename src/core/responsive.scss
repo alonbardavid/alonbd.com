@@ -1,0 +1,8 @@
+$screen-sm-min: 768px;
+$break-small-media-query: "only screen and (max-width: 768px)";
+
+@mixin respond-to($media) {
+  @if $media == phones {
+    @media #{$break-small-media-query} { @content; }
+  }
+}

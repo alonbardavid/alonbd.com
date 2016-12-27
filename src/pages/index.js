@@ -4,8 +4,8 @@ import metadata from '../metadata';
 import BlogSummary from '../components/blog-summary/blog-summary';
 import ProjectSummary from '../components/project-summary';
 
-export default function MainComponent(props){
-    return <section className="content-container">
+export default function IndexPageComponent(){
+    return <section className="index-content-container">
         <div id="index-blog">
             <a href="/blog"><h2>BLOG</h2></a>
             <ul>
@@ -28,3 +28,4 @@ export default function MainComponent(props){
         </div>
     </section>
 }
+IndexPageComponent.transition = 300;

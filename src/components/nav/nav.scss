@@ -1,17 +1,28 @@
-$title-width: 200px;
-$avatar-width: 75px;
-$avatar-height: 85px;
+@import '~src/theme/variables';
+@import '~src/core/responsive';
 
 .menu {
+  z-index:10;
   .logo {
     width:100%;
 
     a {
       display: block;
     }
-    img {
-      width:100%;
+    h1 {
+      margin: 4px 0px 0px 0px;
+      overflow:hidden;
     }
+    svg {
+      width:100%;
+
+      .text {
+        pointer-events: none;
+        transition: transform 0.4s ease-in-out;
+
+      }
+    }
+
   }
   nav {
     display:block;
@@ -28,33 +39,55 @@ $avatar-height: 85px;
       margin-bottom:5px;
       font-weight: bold;
     }
-
+    @include respond-to(phones) {display:none}
   }
   .nav-item {
     transition: color 0.3s ease-in-out;
   }
   .nav-color-primary:hover,.nav-color-primary.selected{
-    color:#5664af;
+    color:$color-primary;
   }
   .nav-color-two:hover,.nav-color-two.selected {
-    color:#56c4c5;
+    color:$color-two;
   }
   .nav-color-three:hover,.nav-color-three.selected{
-    color:#add68a;
+    color:$color-three;
   }
 
   &.full-screen {
     width:100%;
-    position: relative;
+    position: absolute;
 
     .logo {
       width:50vw;
+      @include respond-to(phones) {width:100%}
+
       margin:50px auto auto auto;
 
+      svg .text {
+        @include respond-to(phones) {
+          transform: translateY(0);
+        }
+      }
     }
     nav {
       display:none;
-
+    }
+  }
+  &:not(.full-screen) .logo{
+    @include respond-to(phones) {
+      a {
+        width: 48px;
+        height: 42px;
+        overflow:hidden;
+      }
+      svg {
+        height:42px;
+        width: auto;
+        .text {
+          transform: translateY(-500px);
+        }
+      }
     }
   }
 }

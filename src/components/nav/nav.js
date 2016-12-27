@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Logo from '../../img/logo.svg';
-import 'FLIP/dist/flip';
+import FLIP,{flipGroup} from 'src/core/flip';
 
 import './nav.scss';
 export default class NavComponent extends React.Component {
@@ -10,24 +10,21 @@ export default class NavComponent extends React.Component {
         if (this.props.path != newProps.path &&
             this.props.path == 'index' || newProps.path == 'index'){
             const node = ReactDOM.findDOMNode(this);
-            const flip = new window.FLIP.group([
+            flipGroup([
                 {element: node.querySelector(".logo"), duration: 300}
-            ]);
-            flip.first();
-            if (this.props.path == 'index') {
-                node.classList.remove('full-screen');
-            } else {
-                node.classList.add('full-screen');
-            }
-            flip.last();
-            flip.invert();
-            flip.play();
+            ],()=>{
+                if (this.props.path == 'index') {
+                    node.classList.remove('full-screen');
+                } else {
+                    node.classList.add('full-screen');
+                }
+            })
         }
     }
     render(){
         var className = `menu ${this.props.path == 'index'?'full-screen':''}`;
         return <section className={className}>
-            <h1 className="logo"><a href="/"><img src={Logo} alt="Alon BD - Code/Design/Ops"/></a></h1>
+            <h1 className="logo"><a href="/" dangerouslySetInnerHTML={{__html:Logo}} aria-label="Alon BD - Code/Design/Ops"></a></h1>
             <nav role="navigation">
                 <ul>
                     <li>
@@ -38,9 +35,6 @@ export default class NavComponent extends React.Component {
                     </li>
                     <li>
                         <a className="nav-item nav-color-three" href="mailto:me@alonbardavid.com">CONTACT</a>
-                    </li>
-                    <li>
-                        <a className="nav-item nav-color-three" href="/about">ABOUT</a>
                     </li>
                 </ul>
             </nav>

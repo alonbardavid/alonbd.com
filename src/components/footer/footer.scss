@@ -1,13 +1,18 @@
 @import '~src/theme/variables';
+@import '~src/core/responsive';
 
 footer {
   display:block;
   width:100%;
   background-color: #dddddd;
-  height: $footer-height;
+  min-height: $footer-height;
 
   > .container {
     display:flex;
+
+    @include respond-to(phones) {
+      display:block;
+    }
   }
   .footer-section {
     display:inline-block;
@@ -15,6 +20,14 @@ footer {
     width:50%;
     margin:10px;
     border-right: 1px solid #BBBBBB;
+    @include respond-to(phones) {
+      width:100%;
+
+      h2 {
+        text-align:center;
+      }
+
+    }
 
     &:last-child {
       border-right:none;
@@ -23,6 +36,11 @@ footer {
 
   .footer-hello {
     display:inline-flex;
+
+    @include respond-to(phones) {
+      justify-content: center;
+      align-items: center;
+    }
   }
   .avatar-container {
     height:100%;
@@ -33,6 +51,11 @@ footer {
   }
   .avatar {
     width:75px;
-    height:85px;;
+    height:85px;
+    border-radius: 100px;
+  }
+  .footer-links ul{
+    margin-top:5px;
+    list-style:none;
   }
 }

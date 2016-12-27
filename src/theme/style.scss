@@ -1,14 +1,35 @@
 @import './layout.scss';
+@import '~src/theme/variables';
+@import '~src/core/responsive';
+
 body {
   font-family: "Lato", "Helvetica","Arial";
   margin:0;
 }
 .container {
   margin-left: 200px;
-  width:700px;
+  width: 700px;
+
+  @include respond-to(phones) {
+    width: 100%;
+    margin-left: 0px;
+  }
 }
 
 a {
   text-decoration: none;
   color:inherit;
+}
+
+.link-primary, .link-secondary, .link-tertiary {
+  transition: color 0.3s ease-in-out;
+}
+.link-primary:hover {
+  color:$color-primary;
+}
+.link-secondary:hover {
+  color:$color-two;
+}
+.link-tertiary:hover {
+  color:$color-three;
 }
