@@ -18,17 +18,18 @@ export default class PageTransition extends React.Component {
             const currentNode = wrapperNode.childNodes[1];
             let i = 0;
             const transitionDelay = this.state.Prev.type.transition || 100;
+            const nodeTransitionDuration = 20;
             const flip = new FLIP.group([
                 ...Array.prototype.map.call(prevNode.childNodes, elem=>({
                     element: elem,
-                    duration: 20,
-                    delay: i++ * 20
+                    duration: nodeTransitionDuration,
+                    delay: i>=10?i*nodeTransitionDuration : i++ * nodeTransitionDuration
                 })),
-                {element:prevNode,duration:transitionDelay,delay:i*transitionDelay},
+                {element:prevNode,duration:transitionDelay,delay:i*nodeTransitionDuration +transitionDelay},
                 ...Array.prototype.map.call(currentNode.childNodes, elem=>({
                     element: elem,
-                    duration: 20,
-                    delay: i++ * 20 + transitionDelay
+                    duration: nodeTransitionDuration,
+                    delay: (i>=20?i*nodeTransitionDuration : i++ * nodeTransitionDuration) + transitionDelay
                 }))
             ]);
             prevNode.classList.add('page-transition-out-start');

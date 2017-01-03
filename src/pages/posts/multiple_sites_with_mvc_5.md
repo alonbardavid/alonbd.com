@@ -1,31 +1,125 @@
 ## Multiple sites with MVC 5!
 
 ### Summary
-To 
-What is Lorem Ipsum?
+Sometimes you want to run multiple sites with slightly different content or presentation from the same ASP.net project.
+There's no built in way in ASP.net or using ASP.net MVC to do so, but with a bit of setup and convention it's easy to accomplish.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-Why do we use it?
+Here's what you can do:
 
-```js
-    var code = "code";
+* Save the current site in the `HttpContext` using `Global.aspx requestStart/requestEnd`
+* Use an interface to denote a Model displays differently on different sites
+* Add extension method for site based queries
+* Bundle different css and js based on site
+* Set IIS to serve the same site for multiple domains
+
+
+### Background
+
+Recently I've been asked to merge two, basically identical sites that share the same database.
+The sites showed different content from the same database based on a site id in the models.
+Unlike other frameworks ASP.net doesn't have the concept of sites, but it was fairly easy to setup a few conventions for it to work.
+
+
+### Recipe
+
+#### Save the current site on requestStart
+
+To match each request to a particular site, we need to keep track of the domain.  
+The simplest way is to simply store the domain in the `HttpContext` for each request for easy access later.
+
+```csharp
+    //Global.asax
+    protected void Application_BeginRequest(object sender, EventArgs e)
+    {
+        HttpContext.Current.Items["_site"] = ((ASP.global_asax) sender).Request.Url.Host;
+    }
 ```
 
 
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+#### Use an interface to denote a Model displays differently on different sites
 
-Where does it come from?
+Once the `HttpContext` has a reference to the site, you can set your model to match a specific site.
+For reuse and extension methods it's best to create an interface for it
 
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+```csharp
+    public interface ISiteBased {
+        public string site {get;set;}
+    }
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham
+    public class MyModel:ISiteBased {
+        ...
+    }
+```
 
 
+#### Add extension method for site based queries
 
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+Now you can use an extension method to always use the right site
 
-Where does it come from?
+```csharp
+    public static class SiteExtensions {
+        public IQueryable<T> SiteOnly<T>(this IQueryable<T> query) where T : class,ISiteBased
+        {
+            var currentSite = (string) HttpContext.Current.Items["_site"];
+            return query.where(s=>s.site == currentSite);
+        }
+    }
+```
 
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+Or alternatively you can set it up in your `DBContext`
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham
+```csharp
+    public class MyContext:DBContext {
+        public IQueryable<T> SiteQuery<T>() where T : class,ISiteBased
+        {
+            var currentSite = (string) HttpContext.Current.Items["_site"];
+            return Set<T>().where(s=>s.site == currentSite);
+        }
+    }
+```
+
+Just need to remember to use it whenever you want to show content per site
+
+
+#### Bundle different css and js based on site
+
+To support different styles and javascript for different site we need to do the following:
+
+* put your css in a folder for each site inside a common directory such as `~/Sites/<site name>/`
+* setup a bundle for each site based on some convention
+
+```csharp
+    // App_Start/BundleConfig.cs
+
+    public class BundleConfig {
+        public static void RegisterBundles(BundleCollection bundles){
+            ...
+            foreach(string site in ListOfSites)
+            {
+                bundles.Add(new StyleBundle($"~/content/css/{site}")
+                    .IncludeDirectory($"~/Sites/" + site, "*.css", true));
+            }
+        }
+    }
+```
+
+* use the appropriate bundle in your `_Layout.cshtml`
+
+```html
+    ...
+    <head>
+    ...
+    @Styles.Render("~/content/css")
+    @Styles.Render($"~/content/css/{Context.Items["_site"]})
+    ...
+```
+
+* a similar setup can be used for javascript files (or any other files you want)
+
+
+#### Set IIS to serve the same site for multiple domains
+
+This will work in development (if you change `etc/hosts` file) but for production we need to allow multiple domains
+to get to the same project.
+
+To do that you need to go to `IIS manager` and add bindings to your site for each domain.

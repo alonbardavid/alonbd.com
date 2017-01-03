@@ -1,5 +1,6 @@
 const HtmlWebPackGenerateStaticPlugin = require('../html-webpack-generate-static-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin= require('copy-webpack-plugin');
 
 module.exports = function(config){
     configBinaryFiles(config);
@@ -16,6 +17,9 @@ function configBinaryFiles(config){
         {test: /\.(jpg|png)/,loader:'file-loader?name=[path][name].[hash].[ext]'},
         {test: /\.svg/,loader:'raw-loader'}
     );
+    config.plugins.push(
+        new CopyWebpackPlugin([{from:'img/blog/**.*'}])
+    )
 }
 function configMarkdown(config){
     config.resolve.extensions.push('.md');

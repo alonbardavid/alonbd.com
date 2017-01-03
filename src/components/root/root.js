@@ -12,7 +12,10 @@ export default class RootComponent extends React.Component {
         const normalizedPath = props.path.replace("/","-");
         const meta = {
             ...props.meta,
-            title: `Alon Bar David | ${props.meta.title}`
+            title: `Alon Bar David | ${props.meta.title}`,
+            meta: (props.meta.meta || []).concat({
+                name:"description", content:props.meta.description
+            })
         }
         return (<div id={`page-${normalizedPath}`}>
             <Nav path={props.path}></Nav>

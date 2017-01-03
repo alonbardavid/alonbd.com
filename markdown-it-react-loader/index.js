@@ -16,6 +16,8 @@ module.exports = function (source) {
     });
     md.use(markdownItHighlightjs,{auto:false});
     var content = md.render(source);
+    content = content.replace(/<code([^>]*)>/g,'<code $1 dangerouslySetInnerHTML={{__html:`');
+    content = content.replace(/<\/code>/g,'`}}></code>');
     var res = [
         "var React = require('react');",
         "module.exports = function(){",

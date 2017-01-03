@@ -26,9 +26,13 @@ function overrideLinkAction(){
                 if (node.tagName == 'A') {
                     var href = node.href;
                     if (href.indexOf(window.location.origin) ==0){
-                        event.preventDefault();
                         window.history.pushState(null,null,href);
-                        window.dispatchEvent(new Event('changestate'));
+                        try {
+                            window.dispatchEvent(new Event('changestate'));
+                            event.preventDefault();
+                        } catch(e){
+                            //revert to no ajax loading
+                        }
                     }
                     return;
                 }
