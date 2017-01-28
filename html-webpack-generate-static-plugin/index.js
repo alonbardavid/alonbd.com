@@ -67,8 +67,8 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                             }
                             chunk.files.forEach(function(file){
                                 if (_.endsWith(file,".js")){
-                                    var lastEntryRegex = new RegExp('(src="\\/'+ _.last(mainEntries) + '"><\\/script>)');
-                                    htmlResult = htmlResult.replace(lastEntryRegex,'$1<script src="/' + chunk.files[0] + '"></script>');
+                                    var lastEntryRegex = new RegExp('(src="\\/'+ _.last(mainEntries) + '".*><\\/script>)');
+                                    htmlResult = htmlResult.replace(lastEntryRegex,'$1<script defer src="/' + chunk.files[0] + '"></script>');
                                 }
                             });
                         });
