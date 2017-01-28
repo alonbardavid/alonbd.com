@@ -1,6 +1,7 @@
 const HtmlWebPackGenerateStaticPlugin = require('../html-webpack-generate-static-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin= require('copy-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 module.exports = function(config){
     configBinaryFiles(config);
@@ -12,10 +13,10 @@ module.exports = function(config){
 };
 function configBinaryFiles(config){
     config.module.loaders.push(
-        {test: /\.(woff|eot|ttf)$/, loader: 'file-loader?name=[path][name].[hash].[ext]' },
+        {test: /\.(woff|eot|ttf|svg)$/, include:/fonts/,loader: 'file-loader?name=[path][name].[hash].[ext]' },
         {test: /\.(woff2)$/, loader: 'url-loader' },
         {test: /\.(jpg|png)/,loader:'file-loader?name=[path][name].[hash].[ext]'},
-        {test: /\.svg/,loader:'raw-loader'}
+        {test: /\.svg/,exclude:/fonts/, loader:'raw-loader'}
     );
     config.plugins.push(
         new CopyWebpackPlugin([{from:'img/blog/**.*'}])
@@ -39,6 +40,11 @@ function configHtmlTemplate(config){
             template: './index.html'
         })
     );
+    config.plugins.push(
+        new ScriptExtHtmlWebpackPlugin({
+            defaultAttribute: 'defer'
+        })
+    )
 }
 function configStaticGeneration(config ){
     config.entry['server'] = ['./server-entry.js'];
