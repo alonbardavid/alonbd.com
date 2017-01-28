@@ -2,9 +2,10 @@
 @import '~highlight.js/styles/androidstudio.css';
 .index-content-container {
   position: relative;
-  width: 50vw;
+  width: 45vw;
   padding-top: 20vw;
   margin: 0px auto auto auto;
+  margin-left: calc(22.5vw - 107.5px);
 
   > div {
     width: 50%;
@@ -53,7 +54,7 @@
     width: 90%;
     padding-top:40vw;
   }
-}
-#page-index #main-content {
-  margin: auto;
+  &.page-transition-out-start ,&.page-transition-out-end {
+    visibility: hidden;
+  }
 }
