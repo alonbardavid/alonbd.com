@@ -1,5 +1,4 @@
 @import '~src/core/responsive';
-@import '~highlight.js/styles/androidstudio.css';
 .index-content-container {
   position: relative;
   width: 45vw;
@@ -17,8 +16,9 @@
     }
 
   }
+
   @include respond-to(phones) {
-    width: 90%;
+    width: 100%;
     padding-top:40vw;
   }
   &.page-transition-out-start ,&.page-transition-out-end {

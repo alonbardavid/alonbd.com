@@ -1,3 +1,5 @@
+@import '~src/core/responsive';
+
 .summary-list {
   &,li {
     list-style: none;
@@ -11,9 +13,17 @@
       border-bottom: solid 1px #5664af;
       min-height:100px;
       max-width:350px;
+
+      @include respond-to(phones) {
+        max-width:100%;
+        width:100%;
+        margin-bottom:20px;
+        text-align:center;
+      }
     }
     &:last-child .summary {
       border-bottom:none;
     }
+
   }
 }
