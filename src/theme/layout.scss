@@ -1,7 +1,6 @@
 @import "~src/theme/variables";
 @import '~src/core/responsive';
 
-$menu-desktop-width: 180px;
 .menu {
   position: fixed;
   width:$menu-desktop-width;

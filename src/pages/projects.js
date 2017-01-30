@@ -1,16 +1,14 @@
 import React from 'react';
 import metadata from 'src/metadata';
 import ProjectSummary from 'src/components/project-summary';
+import SummaryList from 'src/components/summary-list/summary-list';
 
-export default function ProjectComponent(){
+export default function ProjectPage(){
     return <div>
         <h2>Projects</h2>
-        <ul>
-            {metadata.projects.map((project,i)=>
-                <li key={i}>
-                    <ProjectSummary project={project} />
-                </li>
+        <SummaryList>
+            {metadata.projects.map(project=> <ProjectSummary project={project} />
             )}
-        </ul>
+        </SummaryList>
     </div>
 }
