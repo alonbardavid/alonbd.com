@@ -2,10 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Logo from '../../img/logo.svg';
 import FLIP,{flipGroup} from 'src/core/flip';
+import {whenScrollDown} from 'src/core/scroll';
 
 import './nav.scss';
 export default class NavComponent extends React.Component {
 
+    state={
+        hide:false
+    }
+    componentWillMount(){
+        whenScrollDown((scrolledDown)=>{
+            this.setState({hide:scrolledDown});
+        },52)
+    }
     componentWillReceiveProps (newProps){
         if (this.props.path != newProps.path &&
             this.props.path == 'index' || newProps.path == 'index'){
@@ -26,7 +35,7 @@ export default class NavComponent extends React.Component {
         }
     }
     render(){
-        var className = `menu ${this.props.path == 'index'?'full-screen':''}`;
+        var className = `menu ${this.props.path == 'index'?'full-screen':''} ${this.state.hide?'hidden':''}`;
         return <section className={className}>
             <h1 className="logo"><a href="/" dangerouslySetInnerHTML={{__html:Logo}} aria-label="Alon BD - Code/Design/Ops"></a></h1>
             <nav role="navigation">

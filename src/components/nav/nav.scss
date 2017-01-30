@@ -96,4 +96,19 @@
       }
     }
   }
+  &:not(.full-screen) {
+    @include respond-to(phones) {
+      height:52px;
+      width:100%;
+      position:fixed;
+      top:0px;
+      background: white;
+      border-bottom: 1px solid $color-light-grey;
+      transition: top 0.2s ease-in-out;
+
+      &.hidden {
+        top:-55px;
+      }
+    }
+  }
 }
