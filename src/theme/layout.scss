@@ -6,7 +6,7 @@ $menu-desktop-width: 180px;
   position: fixed;
   width:$menu-desktop-width;
   left:calc(50% - #{$container-size-desktop / 2} - #{$menu-desktop-width} - 20px);;
-  top: 0;
+  top: 10px;
 
   @include respond-to(phones) {
     left:0;
