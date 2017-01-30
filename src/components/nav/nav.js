@@ -38,7 +38,7 @@ export default class NavComponent extends React.Component {
                         <a className="nav-item nav-color-two" id="nav-blog" href="/blog">BLOG</a>
                     </li>
                     <li>
-                        <a className="nav-item nav-color-three" href="mailto:me@alonbardavid.com">CONTACT</a>
+                        <a className="nav-item nav-color-three" id="nav-contact" href="/contact">CONTACT</a>
                     </li>
                 </ul>
             </nav>
