@@ -1,12 +1,16 @@
 @import "~src/theme/variables";
 @import '~src/core/responsive';
 
+$menu-desktop-width: 180px;
 .menu {
   position: fixed;
-  width:180px;
-  margin-right:20px;
-  left:0;
+  width:$menu-desktop-width;
+  left:calc(50% - #{$container-size-desktop / 2} - #{$menu-desktop-width} - 20px);;
   top: 0;
+
+  @include respond-to(phones) {
+    left:0;
+  }
 }
 #main-content {
   min-height: calc(100vh - #{$footer-height});
@@ -18,5 +22,14 @@
     @include respond-to(phones) {
       margin-top:50px;
     }
+  }
+}
+.container {
+  margin: 0px auto auto auto;
+  width: $container-size-desktop;
+
+  @include respond-to(phones) {
+    width: 100%;
+    margin:0;
   }
 }
