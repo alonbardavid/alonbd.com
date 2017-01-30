@@ -1,5 +1,5 @@
 <div class="subline-date">3 Jan 2017 by Alon Bar David</div>
-## Multiple sites with MVC 5!
+## Multiple sites with MVC 5
 
 ### Summary
 Sometimes you want to run multiple sites with slightly different content or presentation from the same ASP.net project.
