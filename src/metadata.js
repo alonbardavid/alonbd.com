@@ -14,6 +14,10 @@ var metadata =module.exports = {
             "route":"/posts/multiple_sites_with_mvc_5",
             "publishDate":"2017-01-03T12:00:00.000Z"
         },
+        "contact":{
+            "title":"contact info",
+            "route":"/contact"
+        },
         "blog":{
             "title":"Blog",
             "route":"/blog"
@@ -54,6 +58,7 @@ var metadata =module.exports = {
         },
         {
             title:"Lograp",
+            url:"https://github.com/alonbardavid/lograp",
             description:"Logging wrapper for Winston that automatically adds time and call path"
         },
         {
