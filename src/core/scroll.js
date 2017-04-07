@@ -6,7 +6,7 @@ export function whenScrollDown(cb,min=0){
     window.onscroll = function() {
         didScroll = true;
     };
-    setInterval(function() {
+    window.setInterval && window.setInterval(function() {
         if (didScroll) {
             hasScrolled();
             didScroll = false;
