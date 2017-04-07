@@ -4,7 +4,7 @@ var metadata =module.exports = {
             return p.indexOf("posts/") ==0;
         }).map(function(p){
             return metadata.pages[p];
-        })
+        }).sort((a,b)=>a.publishDate < b.publishDate)
     },
     pages: {
         "posts/multiple_sites_with_mvc_5":{
@@ -13,6 +13,13 @@ var metadata =module.exports = {
             "tags":[".net","MVC","C#","Entity Framework","ASP","Programming"],
             "route":"/posts/multiple_sites_with_mvc_5",
             "publishDate":"2017-01-03T12:00:00.000Z"
+        },
+        "posts/redux_module_composition": {
+            "title":"Redux module composition and how to avoid namespacing",
+            "description":"A new way to manage and reuse redux packages",
+            "tags":["javascript","redux","redux-blocks"],
+            "route":"/posts/redux_module_composition",
+            "publishDate":"2017-04-07T12:00:00.000Z"
         },
         "contact":{
             "title":"contact info",
@@ -46,6 +53,11 @@ var metadata =module.exports = {
         }
     ],
     projects: [
+        {
+            title:"redux-blocks",
+            description:"Authentication and Authorization framework for angular.js",
+            url:"https://github.com/alonbardavid/visor"
+        },
         {
             title:"Visor",
             description:"Authentication and Authorization framework for angular.js",
