@@ -5,6 +5,7 @@
 Current solutions for composing and reusing _Redux_ code suffer from a lack of encapsulation - modules either require the user
 to supply a path on the store or already hardcode the store's path.
 Encapsulation, and therefor simple composition and reuse, can be achieved by function composition - this article explains how this works.
+
 [Redux-blocks](https://github.com/alonbardavid/redux-blocks) is a library that implements the ideas presented here.
 
 
@@ -118,7 +119,7 @@ functions, and as functions they can be wrapped by other functions.
 Instead of the user delegating the prefixing of the reducer to the module , we can instead isolate the module into
 a state that only contains the state,action and types that the module needs.
 
-####Isolating a reducer
+#### Isolating a reducer
 To isolate a reducer, we simply wrap it in function that sends it the nested state.
 
 Instead of doing this:
@@ -150,7 +151,7 @@ we can do this:
     }
 ```
 
-####isolating an action (and action type)
+#### Isolating an action (and action type)
 We can prefix a type with the same prefix we used to contain the reducer.
 
 So instead of:
@@ -212,7 +213,7 @@ and if we combine these with the reducer, we can isolate both actions and reduce
     }
 ```
 
-####isolating selectors
+#### Isolating selectors
 Similarly to reducers, selectors simply need to be wrapped in a function that calls the selector with a reduced state.
 
 ```js
