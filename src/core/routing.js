@@ -2,8 +2,8 @@ import React from 'react';
 import crossroads from 'crossroads';
 import metadata from '../metadata';
 import Root from 'src/components/root/root';
-import Index from 'src/pages/index';
 import Loader from 'src/components/loader/loader';
+import Post from 'src/components/post';
 
 const pages = require.context('bundle-loader?lazy&name=[path][name]!src/pages',true,/.*/);
 
@@ -49,12 +49,19 @@ export function getOnPathLoadComponent(path){
         <div className="loaderPage"><Loader></Loader></div>
     </Root>
 }
+export function wrapComponent(Component,meta){
+    if (meta.route.indexOf("/posts/") ==0){
+        return <Post meta={meta}><Component meta={meta}/></Post>
+    }
+    return <Component meta={meta}/>
+}
 export function getComponent(path) {
     path = path.lastIndexOf("/") == path.length - 1? path.substr(0,path.length-1):path;
     return getPage(`./${path}`).then(args=>{
         const Component = args.default || args;
-        return <Root meta={metadata.pages[path]} path={path}>
-            <Component></Component>
+        const meta = metadata.pages[path];
+        return <Root meta={meta} path={path}>
+            {wrapComponent(Component,meta)}
         </Root>
     });
 }
