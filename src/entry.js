@@ -1,8 +1,10 @@
 import ReactDOM from 'react-dom';
 import {getComponent,getOnPathLoadComponent,setRouteHandler,startRouting} from 'src/core/routing';
-
+import MixPanel from 'src/core/mixpanel';
+const MIXPANEL_API_TOKEN = process.env.NODE_ENV == 'production'?"99f090d64dfd7b5a03c6d2541720a2a4":"";
 var firstRun = true;
 var rootElem = document.getElementById('root');
+var mixpanel = new MixPanel(MIXPANEL_API_TOKEN);
 function renderComponent(Component){
     ReactDOM.render(
         Component,
@@ -10,6 +12,7 @@ function renderComponent(Component){
     );
 }
 function render(path){
+    mixpanel.trackEvent("page_view");
     var timeout;
     if (!firstRun) {
         timeout = setTimeout(()=> {
