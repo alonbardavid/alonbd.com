@@ -149,6 +149,6 @@ export default class MixPanel {
                 '$current_url': window.location.href
             },props)
         };
-        fetch(`http://api.mixpanel.com/track/?data=${btoa(JSON.stringify(data))}`);
+        fetch(`//api.mixpanel.com/track/?data=${btoa(JSON.stringify(data))}`);
     }
 }
