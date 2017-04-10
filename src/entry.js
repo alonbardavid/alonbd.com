@@ -12,7 +12,7 @@ function renderComponent(Component){
     );
 }
 function render(path){
-    mixpanel.trackEvent("page_view");
+    mixpanel.trackEvent("page_view",{path});
     var timeout;
     if (!firstRun) {
         timeout = setTimeout(()=> {
