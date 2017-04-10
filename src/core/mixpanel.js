@@ -137,8 +137,7 @@ export default class MixPanel {
             '$device': device(navigator.userAgent),
             '$browser_version': browserVersion($browser, navigator.userAgent, navigator.vendor, window.opera),
             '$screen_height': screen.height,
-            '$screen_width': screen.width,
-            'user_agent':navigator.userAgent
+            '$screen_width': screen.width
         })
     }
 
@@ -149,6 +148,6 @@ export default class MixPanel {
                 '$current_url': window.location.href
             },props)
         };
-        fetch(`//api.mixpanel.com/track/?data=${btoa(JSON.stringify(data))}`);
+        fetch(`//api.mixpanel.com/track/?data=${btoa(JSON.stringify(data))}&verbose=1`);
     }
 }
