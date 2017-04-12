@@ -74,7 +74,7 @@ HtmlWebpackGenerateStaticPlugin.prototype.apply = function(compiler) {
                         });
                     }
                     if (filename == htmlPluginData.plugin.options.filename ||
-                        "/" + filename == htmlPluginData.plugin.options.filename){
+                        "./" + filename == htmlPluginData.plugin.options.filename){
                         htmlPluginData.html = htmlResult;
                     } else {
                         compilation.assets[filename] = new WebpackSources.RawSource(htmlResult);

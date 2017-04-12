@@ -32,12 +32,12 @@ function configMarkdown(config){
 function configHtmlTemplate(config){
     config.plugins.push(
         new HtmlWebpackPlugin({
-            filename:"./template.html",
+            filename:"./index.html",
             excludeChunks: ['server'],
             chunkSortMode: 'dependency',
             hash: false,
             inject: 'body',
-            template: './template.html'
+            template: './index.html'
         })
     );
     config.plugins.push(
