@@ -55,8 +55,8 @@ var metadata =module.exports = {
     projects: [
         {
             title:"redux-blocks",
-            description:"Authentication and Authorization framework for angular.js",
-            url:"https://github.com/alonbardavid/visor"
+            description:"Redux module composition library ",
+            url:"https://github.com/alonbardavid/redux-blocks"
         },
         {
             title:"Visor",
