@@ -29,6 +29,6 @@
   "scripts": {
     "start": "vuepress dev",
     "build": "vuepress build && npm run urls:pretty",
-    "urls:pretty": "find ./.vuepress/dist -type f ! -name \"*.*\" -exec sh -c 'mv \"$0\" \"$0.html\"' - {} \\;"
+    "urls:pretty": "find ./dist -type f ! -name \"*.*\" -exec sh -c 'mv \"$0\" \"$0.html\"' - {} \\;"
   }
 }

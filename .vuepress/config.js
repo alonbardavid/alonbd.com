@@ -4,6 +4,7 @@ module.exports = {
   title:"alonbd.com",
   description:"just playing around",
   evergreen:true,
+  dest:"dist",
   head:[
     ['link',{rel:"stylesheet",type:"text/css",href:"/fonts/fonts.css"}]
   ],
