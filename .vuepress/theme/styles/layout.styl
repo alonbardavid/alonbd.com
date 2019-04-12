@@ -1,0 +1,34 @@
+@import "./variables.styl";
+@import './responsive.styl';
+
+.menu {
+  position: fixed;
+  width: menu-desktop-width;
+  left:"calc(50% - %s - %s - 20px)" % (container-size-desktop/2 menu-desktop-width);
+  top: 10px;
+
+  +respond-to(phones) {
+      left:0;
+  }
+}
+#main-content {
+  min-height: "calc(100vh - %s)" % footer-height;
+  position: relative;
+  box-sizing: border-box;
+  padding: 15px;
+
+  h2 {
+    +respond-to(phones) {
+        margin-top:50px;
+    }
+  }
+}
+.container {
+  margin: 0px auto auto auto;
+  width: container-size-desktop;
+
+  +respond-to(phones) {
+    width: 100%;
+    margin:0;
+  }
+}

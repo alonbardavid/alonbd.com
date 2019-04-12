@@ -1,6 +1,6 @@
 {
   "name": "alonbd.com",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Alon Bar David's personal website",
   "homepage": "https://alonbd.com",
   "repository": {
@@ -16,67 +16,19 @@
   "engines": {
     "node": ">=5.11"
   },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production BUILD_TASK=build webpack --display-chunks --progress --bail",
-    "build-dev": "cross-env NODE_ENV=development BUILD_TASK=build webpack --display-chunks --progress --bail",
-    "profile-size": "cross-env NODE_ENV=production BUILD_TASK=profile webpack --profile --json |  webpack-bundle-size-analyzer",
-    "clean": "del-cli ./target",
-    "dev": "cross-env NODE_ENV=development BUILD_TASK=dev webpack-dev-server --progress --watch-poll",
-    "prebuild": "npm run clean",
-    "start": "npm run dev"
-  },
   "dependencies": {
     "FLIP": "github:googlechrome/flipjs",
-    "crossroads": "^0.12.2",
-    "highlight.js": "^9.9.0",
-    "inferno": "^1.2.2",
-    "inferno-compat": "^1.2.2",
-    "inferno-server": "^1.2.2",
-    "lodash": "^4.14.2",
-    "markdown-it-jsx": "^1.0.0",
-    "normalize.css": "^5.0.0",
-    "react": "~15.2.0",
-    "react-document-meta": "^2.1.1",
-    "react-dom": "~15.2.0",
-    "react-helmet": "^3.2.3",
-    "markdown-it-jsx": "1.0.0"
+    "css-loader": "^2.1.1",
+    "highlight.js": "^9.15.6",
+    "markdown-it-highlightjs": "^3.0.0",
+    "normalize.css": "^8.0.1",
+    "raw-loader": "0.5.1",
+    "vuepress": "^1.0.0-alpha.47",
+    "vuepress-plugin-clean-urls": "^1.0.3"
   },
-  "devDependencies": {
-    "autoprefixer": "~6.3.6",
-    "babel-core": "~6.10.4",
-    "babel-loader": "~6.2.4",
-    "babel-polyfill": "~6.9.1",
-    "babel-preset-es2015": "~6.9.0",
-    "babel-preset-react": "~6.11.1",
-    "babel-preset-stage-0": "~6.5.0",
-    "bundle-loader": "^0.5.4",
-    "copy-webpack-plugin": "^4.0.1",
-    "cross-env": "~1.0.8",
-    "css-loader": "~0.23.1",
-    "css-mqpacker": "^5.0.1",
-    "del-cli": "^0.2.0",
-    "eval": "^0.1.2",
-    "extract-text-webpack-plugin": "~1.0.1",
-    "file-loader": "^0.9.0",
-    "html-webpack-plugin": "~2.22.0",
-    "lodash": "^4.17.2",
-    "markdown-it": "^8.1.0",
-    "markdown-it-front-matter": "^0.1.2",
-    "markdown-it-highlightjs": "^2.0.0",
-    "node-sass": "~3.8.0",
-    "npm-run-all": "^3.1.1",
-    "postcss-loader": "~0.9.1",
-    "raw-loader": "^0.5.1",
-    "react-addons-test-utils": "~15.2.0",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "sass-loader": "~4.0.0",
-    "script-ext-html-webpack-plugin": "^1.3.5",
-    "style-loader": "~0.13.1",
-    "uglify-loader": "^1.3.0",
-    "url-loader": "^0.5.7",
-    "webpack": "~1.13.1",
-    "webpack-bundle-size-analyzer": "^2.2.0",
-    "webpack-dev-server": "~1.14.1",
-    "webpack-md5-hash": "~0.0.5"
+  "scripts": {
+    "start": "vuepress dev",
+    "build": "vuepress build && npm run urls:pretty",
+    "urls:pretty": "find ./dist -type f ! -name \"*.*\" -exec sh -c 'mv \"$0\" \"$0.html\"' {} \\;"
   }
 }
