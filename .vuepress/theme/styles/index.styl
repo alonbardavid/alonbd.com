@@ -1,0 +1,34 @@
+@import '~highlight.js/styles/androidstudio.css';
+@import '~normalize.css';
+@import './layout.styl';
+@import './variables.styl';
+@import './responsive.styl';
+@import './markdown.styl';
+body {
+  font-family: "Lato", "Helvetica","Arial";
+  margin:0;
+}
+
+a {
+  text-decoration: none;
+  color:inherit;
+}
+
+.link-primary, .link-secondary, .link-tertiary {
+  transition: color 0.3s ease-in-out;
+}
+.link-primary:hover {
+  color:$color-primary;
+}
+.link-secondary:hover {
+  color:$color-two;
+}
+.link-tertiary:hover {
+  color:$color-three;
+}
+
+h2 {
+  +respond-to(phones) {
+    text-align: center;
+  }
+}
