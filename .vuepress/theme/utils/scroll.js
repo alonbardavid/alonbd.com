@@ -11,7 +11,7 @@ export function whenScrollDown(cb,min=0){
             hasScrolled();
             didScroll = false;
         }
-    }, 250);
+    }, 100);
 
     function hasScrolled() {
         var st = window.pageYOffset;

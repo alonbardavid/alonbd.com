@@ -56,7 +56,7 @@
           }
         }).then(()=>{
           if (fullScreen) {
-            node.classList.add('fullscreen-tran-finished');
+            //node.classList.add('fullscreen-tran-finished');
           }
         })
       }
@@ -126,7 +126,7 @@
 
         &.full-screen {
             width:100%;
-            position: absolute;
+            position: fixed;
             left:0;
 
             .logo {
