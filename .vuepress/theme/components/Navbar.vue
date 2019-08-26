@@ -49,6 +49,7 @@
         flipGroup([
           {element: node.querySelector(".logo"), duration: 300}
         ],()=>{
+          window.scrollTo(0,0)
           if (fullScreen) {
             node.classList.add('full-screen');
           } else {
@@ -126,7 +127,7 @@
 
         &.full-screen {
             width:100%;
-            position: fixed;
+            position: absolute;
             left:0;
 
             .logo {
