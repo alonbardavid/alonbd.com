@@ -57,8 +57,12 @@ export function suspendableComputed(
 }
 ```
 
-so instead of `@computed` you can use `suspendableComputed` and stop the computations but 
-still keep all the mobx goodness.
+so instead of _@computed_ you use _suspendableComputed_ and whenever you 
+want to suspend all computation you simply call `setSuspended(true)` and 
+anything calling the computed function will get a cached value.    
+When you want to start evaluating again, you call `setSuspended(false)`
+and the last change that should have triggered your _computed_ evaluation is
+triggered again.
 
 ### Alternatives
 
