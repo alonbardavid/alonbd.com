@@ -6,10 +6,10 @@
                     <img class="avatar" src="/images/avatar.jpg" alt="Alon Bar David"></img>
                 </div>
                 <div >
-                    <h2>HELLO!</h2>
+                    <h2>Hi!</h2>
                     <p>
                         My name is Alon Bar David.<br/>
-                        I'm an independent consultant, web developer, software development enthusiast
+                        I'm an independent consultant, fullstack architect, software development enthusiast
                         and proud father of two.
                     </p>
                 </div>
