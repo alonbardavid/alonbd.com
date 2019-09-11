@@ -1,5 +1,5 @@
 ---
-title: What it means to be a Full-Stack developer
+title: What it means to be a FullStack developer
 description: Why you can also do fullstack development and what are the benefits 
 tags: Full-Stack,fullstack
 createdAt: 2019-09-11
