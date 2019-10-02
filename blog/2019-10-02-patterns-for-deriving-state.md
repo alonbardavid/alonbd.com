@@ -422,6 +422,7 @@ harder - and writing derived state more natural.
 
 Here's the hook syntax code for both examples which were written
 in class syntax:
+
 __Filtering and sorting lists__
 ``` js
 function sortedList(props){
@@ -442,6 +443,7 @@ function sortedList(props){
     </div>    
 }
 ```
+
 __Showing selected items in a checklist__
 
 ``` js
