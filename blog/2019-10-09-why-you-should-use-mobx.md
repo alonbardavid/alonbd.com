@@ -1,6 +1,6 @@
 ---
-title: Why you should use mobx
-description: An list of advantages of mobx over different state management solutions 
+title: Why you should use MobX
+description: An list of advantages of MobX over different state management solutions 
 tags: programming, mobx, redux, react
 createdAt: 2019-10-09
 ---
@@ -161,11 +161,10 @@ export default connect(mapStateToProps,mapDispatchToProps)(ResourceView)
 
 ```
 
-Another solution that is rife with boilerplate (though nothing can
-be as boilerplatly as _redux_) is using state with the Context api
-in react.    
+Another option for state management in React is to use the 
+Context api.
 
-Let's take the same api example:
+Let's make the same api example with Context and Hooks:
 
 ```js
 const ResourceContext = React.createContext();
@@ -221,10 +220,6 @@ of the app - anything that needs to be shown in 2 sections of the app
 notifications/messages , authentication (and my user info), showing 
 if a feed/group has more items to show, number of online users and
 a lot more.
-
-If you also go by Kent C. Dodds' suggestion in [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
-you'll be effectively doubling the size of your boilerplate (using
-separate contexts for the state value and the function that updates it)
 
 Since you often bundle state and actions together with MobX it also
 lessons the problem of prop drilling - it's much easier to send a
