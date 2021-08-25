@@ -3,14 +3,15 @@
         <div class="container">
             <div class="footer-section footer-hello">
                 <div class="avatar-container">
-                    <img class="avatar" src="/images/avatar.jpg" alt="Alon Bar David"></img>
+                    <img class="avatar" src="/images/avatar.jpeg" alt="Alon Bar David"></img>
                 </div>
                 <div >
                     <h2>Hi!</h2>
                     <p>
                         My name is Alon Bar David.<br/>
-                        I'm an independent consultant, fullstack architect, software development enthusiast
-                        and proud father of two.
+                        I'm a team lead at <a href="https://www.meliopayments.com">Melio</a>, a fullstack enthusiast,
+                        great believer in the power of ownership and proud father of two.
+
                     </p>
                 </div>
             </div>
@@ -90,8 +91,8 @@
             margin-right:20px;
         }
         .avatar {
-            width:75px;
-            height:85px;
+            width:77px;
+            height:77px;
             border-radius: 100px;
         }
         .footer-links ul{
