@@ -1,6 +1,6 @@
 ---
 title: Why you should use MobX
-description: An list of advantages of MobX over different state management solutions 
+description: A list of advantages of MobX over different state management solutions 
 tags: programming, mobx, redux, react
 createdAt: 2019-10-09
 ---
