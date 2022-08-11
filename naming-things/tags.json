@@ -1,0 +1,53 @@
+{
+  "relationship": {
+    "description": "Denote a type that is in a relationship with another type- such as parent-child, sibling etc.."
+  },
+  "hierarchy": {
+    "description": "Denote a type that has an ordered relationship with other types"
+  },
+  "grouping": {
+    "description": "Denote a type that groups or otherwise connects other types"
+  },
+  "design pattern": {
+    "description": "Denotes a type that is one of a common design pattern"
+  },
+  "structure": {
+    "description": "Denotes a type that defines a structure or order to something, possibly other types"
+  },
+  "discriminator": {
+    "description": "Denotes a type that is used to differentiate between other types"
+  },
+  "factory": {
+    "description": "Denotes a type that is used to create another type"
+  },
+  "abstract": {
+    "description": "Denotes a type that is the abstract of another type"
+  },
+  "data structure": {
+    "description": "Denotes a type that is used in common  data structures"
+  },
+  "foundation": {
+    "description": "Denotes a type that is the foundation of other type"
+  },
+  "expansion": {
+    "description": "Denotes a type that expands on or adds to another type"
+  },
+  "product": {
+    "description": "Denotes a type that is the result of something"
+  },
+  "similar": {
+    "description": "Denotes a type that is a copy or a close transformation of a type"
+  },
+  "modification": {
+    "description": "Denotes a type that is a modification of something"
+  },
+  "reduced": {
+    "description": "Denotes a type that is less than, or a limited version of, another type"
+  },
+  "doing": {
+    "description": "Denotes a type that does something actively, possibly to another type"
+  },
+  "container": {
+    "description": "Denotes a type that contains something, possibly another type"
+  }
+}

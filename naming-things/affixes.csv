@@ -1,0 +1,212 @@
+name        ,section        ,variations     ,tags
+abstract    ,abstract       ,               ,abstract
+type        ,abstract       ,               ,abstract|discriminator
+kind        ,abstract       ,kin            ,abstract|discriminator
+mode        ,discriminator  ,               ,discriminator|abstract
+mold        ,factory        ,               ,factory|abstract
+skeleton    ,factory        ,               ,factory|design pattern
+class       ,abstract       ,               ,abstract|discriminator|design pattern
+shape       ,abstract       ,               ,abstract
+nested      ,grouping       ,               ,grouping|relationship|data structure
+schema      ,abstract       ,               ,abstract|factory
+spec        ,abstract       ,               ,abstract|discriminator
+template    ,factory        ,               ,factory|abstract|design pattern|structure
+structure   ,structure      ,struct         ,abstract|data structure
+mount       ,relationship   ,mounted        ,relationship|doing
+child       ,relationship   ,               ,relationship|hierarchy|data structure
+sibling     ,relationship   ,brother|sister ,relationship|data structure
+related     ,relationship   ,               ,relationship
+parent      ,relationship   ,               ,relationship|hierarchy|data structure
+factory     ,factory        ,               ,factory|design pattern
+structure   ,structure      ,struct         ,structure
+predecessor ,relationship   ,pre            ,relationship
+successor   ,relationship   ,               ,relationship
+root        ,relationship   ,               ,relationship|foundation|hierarchy
+top         .relationship   ,               ,relationship|hierarchy
+primary     ,hierarchy      ,prime          ,hierarchy
+secondary   ,hierarchy      ,               ,hierarchy
+descendent  ,relationship   ,               ,relationship|hierarchy
+principal   ,hierarchy      ,               ,hierarchy
+modification,modification   ,mod|modified   ,modification|similar
+node        ,data structure ,               ,data structure
+derived     ,modification   ,derivative     ,modification|product|similar|reduced
+wrapper     ,container      ,wrapped        ,container|modification
+adapter     ,modification   ,adapted        ,modification|design pattern
+envelope    ,container      ,               ,container|grouping
+core        ,foundation     ,               ,foundation|abstract
+foundation  ,foundation     ,               ,foundation|abstract
+base        ,foundation     ,               ,foundation|abstract
+kernel      ,foundation     ,               ,foundation
+heart       ,foundation     ,               ,foundation
+origin      ,foundation     ,               ,foundation|relationship
+group       ,grouping       ,               ,grouping|container
+tree        ,grouping       ,               ,grouping|data structure
+pool        ,grouping       ,               ,grouping|container
+cluster     ,grouping       ,               ,grouping
+collection  ,grouping       ,               ,grouping
+enumeration ,grouping       ,               ,grouping|data structure
+composition ,grouping       ,               ,grouping|data structure
+union       ,grouping       ,               ,grouping
+compact
+box
+section
+part
+segment
+container
+chunk
+package
+series
+slice
+component
+join (joiner, joined)
+collector
+combiner (combined)
+compose (composer)
+merger (merged)
+aggregate
+united (uniter)
+unit
+syntax
+system
+option
+iterator
+bucket
+module
+namespace
+producer (product)
+worker
+actor
+provider
+consumer
+initializer
+creator
+intersect
+sort
+instance
+model
+data
+stats
+details
+info
+input
+output
+product
+result
+property (prop)
+attribute (attr)
+definition (def)
+description (desc)
+setup
+configuration (config)
+provision
+initiator (initiation)
+initial
+editor (edit)
+settings
+form
+service
+extension
+expansion
+augment
+enrichment (enricher)
+helper
+job
+scheduler (schedule)
+summary
+brief
+concise
+outline
+pattern
+element
+partition
+branch
+transform
+request
+response
+insert
+capture
+process
+store (storage)
+fast
+quick
+engine
+role
+copy
+clone
+replica
+mock
+stub
+fake
+duplicate
+double
+dummy
+simple
+mirror
+lite (light)
+flyweight
+prototype
+phase
+step
+instruction
+action (activity)
+operation
+command
+dispatch
+resource
+item
+ticket
+card
+tag
+row
+column
+view
+perspective
+status
+state
+position
+predicate
+event
+singleton
+mediator
+circuitbreaker
+decorator
+observer
+controller
+queue
+stack
+monad
+app
+interface
+platform
+web
+matrix
+orchestrator
+handler
+infrastructure
+saga
+epic
+catalog
+inventory
+facade
+gateway
+gatekeeper
+filter
+pipe
+table
+index
+source
+event
+backend
+frontend
+manager
+choreographer
+ambassador
+intent
+marshall
+encode
+encrypt
+hash
+map
+raw
+depository
+populate
