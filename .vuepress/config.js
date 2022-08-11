@@ -2,7 +2,7 @@ const highllightJs = require('markdown-it-highlightjs');
 
 module.exports = {
   title:"alonbd.com",
-  description:"just playing around",
+  description:"personal site for Alon Bar David",
   evergreen:true,
   dest:"dist",
   head:[

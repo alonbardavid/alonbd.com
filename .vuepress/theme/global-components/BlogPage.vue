@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: "ProjectPage",
+    name: "BlogPage",
     computed:{
       posts(){
         return this.$site.pages.filter(p=>/\/blog\/.+/.test(p.regularPath)).sort((a,b)=>{
