@@ -1,96 +1,97 @@
-name        ,section        ,variations     ,tags
-abstract    ,abstract       ,               ,abstract
-type        ,abstract       ,               ,abstract|discriminator
-kind        ,abstract       ,kin            ,abstract|discriminator
-mode        ,discriminator  ,               ,discriminator|abstract
-mold        ,factory        ,               ,factory|abstract
-skeleton    ,factory        ,               ,factory|design pattern
-class       ,abstract       ,               ,abstract|discriminator|design pattern
-shape       ,abstract       ,               ,abstract
-nested      ,grouping       ,               ,grouping|relationship|data structure
-schema      ,abstract       ,               ,abstract|factory
-spec        ,abstract       ,               ,abstract|discriminator
-template    ,factory        ,               ,factory|abstract|design pattern|structure
-structure   ,structure      ,struct         ,abstract|data structure
-mount       ,relationship   ,mounted        ,relationship|doing
-child       ,relationship   ,               ,relationship|hierarchy|data structure
-sibling     ,relationship   ,brother|sister ,relationship|data structure
-related     ,relationship   ,               ,relationship
-parent      ,relationship   ,               ,relationship|hierarchy|data structure
-factory     ,factory        ,               ,factory|design pattern
-structure   ,structure      ,struct         ,structure
-predecessor ,relationship   ,pre            ,relationship
-successor   ,relationship   ,               ,relationship
-root        ,relationship   ,               ,relationship|foundation|hierarchy
-top         .relationship   ,               ,relationship|hierarchy
-primary     ,hierarchy      ,prime          ,hierarchy
-secondary   ,hierarchy      ,               ,hierarchy
-descendent  ,relationship   ,               ,relationship|hierarchy
-principal   ,hierarchy      ,               ,hierarchy
-modification,modification   ,mod|modified   ,modification|similar
-node        ,data structure ,               ,data structure
-derived     ,modification   ,derivative     ,modification|product|similar|reduced
-wrapper     ,container      ,wrapped        ,container|modification
-adapter     ,modification   ,adapted        ,modification|design pattern
-envelope    ,container      ,               ,container|grouping
-core        ,foundation     ,               ,foundation|abstract
-foundation  ,foundation     ,               ,foundation|abstract
-base        ,foundation     ,               ,foundation|abstract
-kernel      ,foundation     ,               ,foundation
-heart       ,foundation     ,               ,foundation
-origin      ,foundation     ,               ,foundation|relationship
-group       ,grouping       ,               ,grouping|container
-tree        ,grouping       ,               ,grouping|data structure
-pool        ,grouping       ,               ,grouping|container
-cluster     ,grouping       ,               ,grouping
-collection  ,grouping       ,               ,grouping
-enumeration ,grouping       ,               ,grouping|data structure
-composition ,grouping       ,               ,grouping|data structure
-union       ,grouping       ,               ,grouping
-compact
-box
-section
-part
-segment
-container
-chunk
-package
-series
-slice
-component
-join (joiner, joined)
-collector
-combiner (combined)
-compose (composer)
-merger (merged)
-aggregate
-united (uniter)
-unit
-syntax
-system
-option
-iterator
-bucket
-module
-namespace
-producer (product)
-worker
-actor
-provider
-consumer
-initializer
-creator
-intersect
-sort
-instance
-model
-data
+name        ,canonical      ,variations                     ,tags
+abstract    ,abstract       ,                               ,abstract
+type        ,abstract       ,                               ,abstract|discriminator
+kind        ,abstract       ,kin                            ,abstract|discriminator
+mode        ,discriminator  ,                               ,discriminator|abstract
+mold        ,factory        ,                               ,factory|abstract
+skeleton    ,factory        ,                               ,factory|design pattern
+class       ,abstract       ,                               ,abstract|discriminator|design pattern
+shape       ,abstract       ,                               ,abstract
+nested      ,group          ,                               ,group|relationship|data structure
+schema      ,abstract       ,                               ,abstract|factory
+spec        ,abstract       ,                               ,abstract|discriminator
+template    ,factory        ,                               ,factory|abstract|design pattern|structure
+relationship,relationship   ,                               ,relationship
+mounted     ,relationship   ,mount|mounter                  ,relationship
+child       ,relationship   ,                               ,relationship|hierarchy|data structure
+sibling     ,relationship   ,brother|sister                 ,relationship|data structure
+related     ,relationship   ,                               ,relationship
+parent      ,relationship   ,                               ,relationship|hierarchy|data structure
+factory     ,factory        ,                               ,factory|design pattern
+structure   ,structure      ,struct                         ,structure|data structure
+predecessor ,relationship   ,pre                            ,relationship
+successor   ,relationship   ,post                           ,relationship
+root        ,relationship   ,                               ,relationship|foundation|hierarchy
+top         .relationship   ,                               ,relationship|hierarchy
+primary     ,hierarchy      ,prime                          ,hierarchy
+secondary   ,hierarchy      ,                               ,hierarchy
+descendent  ,relationship   ,                               ,relationship|hierarchy
+principal   ,hierarchy      ,                               ,hierarchy
+modification,modification   ,mod|modified                   ,modification|similar
+node        ,part           ,                               ,part|data structure
+derived     ,modification   ,derivative                     ,modification|product|similar|reduced
+wrapper     ,container      ,wrapped                        ,container|modification
+adapter     ,modification   ,adapted                        ,modification|design pattern
+envelope    ,container      ,                               ,container|group
+core        ,foundation     ,                               ,foundation|abstract
+foundation  ,foundation     ,                               ,foundation|abstract
+base        ,foundation     ,                               ,foundation|abstract
+kernel      ,foundation     ,                               ,foundation
+heart       ,foundation     ,                               ,foundation
+origin      ,foundation     ,                               ,foundation|relationship
+group       ,group          ,                               ,group|container
+tree        ,group          ,                               ,group|data structure
+pool        ,group          ,                               ,group|container
+cluster     ,group          ,                               ,group
+collection  ,group          ,collect|collector              ,group
+enumeration ,group          ,enumerate|enumerated           ,group|data structure
+composition ,group          ,compose|composed               ,group|combined|data structure
+union       ,group          ,                               ,group
+compact     ,small          ,                               ,small
+small       ,small          ,                               ,small
+mini        ,small          ,                               ,small
+short       ,small          ,                               ,small
+box         ,container      ,                               ,container
+section     ,part           ,                               ,part|group
+category    ,discriminator  ,                               ,discriminator
+part        ,part           ,                               ,part|small|discriminator
+segment     ,part           ,                               ,part
+container   ,container      ,                               ,container|design pattern
+chunk       ,small          ,                               ,small
+package     ,container      ,                               ,container|group
+series      ,group          ,                               ,group|data structure
+slice       ,part           ,                               ,part|small
+component   ,part           ,                               ,part|discriminator|design pattern
+joined      ,combined       ,join|joiner                    ,combined|group
+combined    ,combined       ,combine|combiner               ,combined|group
+merged      ,combined       ,merge|merger                   ,combined|group|modification
+aggregate   ,group          ,                               ,group|combined|modification
+united      ,combined       ,unite                          ,combined|group
+unit        ,part           ,                               ,part
+system      ,module         ,                               ,module
+service     ,module         ,                               ,module
+option      ,abstract       ,                               ,abstract
+iteration   ,group          ,iterate|iterated               ,group
+bucket      ,group          ,                               ,group
+module      ,module         ,                               ,module
+namespace   ,module         ,                               ,module|group
+producer    ,factory        ,produce|product                ,factory|design pattern
+worker      ,actor          ,work                           ,actor
+actor       ,actor          ,act                            ,actor
+provider    ,factory        ,provide|provided               ,factory|design pattern
+consumer    ,consumer       ,consume|consumed               ,consumer
+initial     ,config         ,initiate|initiator|initializer ,config|small
+creator     ,factory        ,create|created                 ,factory
+intersected ,combined       ,intersect                      ,combined|modification
+sorted      ,modification   ,sort|sorter                    ,modification|group
+instance    ,concrete       ,                               ,concrete|factory|part
+concrete    ,concrete       ,                               ,concrete
+model       ,abstract       ,                               ,abstract|discriminator|factory
 stats
 details
 info
 input
 output
-product
 result
 property (prop)
 attribute (attr)
@@ -99,12 +100,9 @@ description (desc)
 setup
 configuration (config)
 provision
-initiator (initiation)
-initial
 editor (edit)
 settings
 form
-service
 extension
 expansion
 augment
@@ -208,5 +206,8 @@ encrypt
 hash
 map
 raw
+resolve
 depository
 populate
+syntax
+data
