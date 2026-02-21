@@ -28,8 +28,8 @@
     "vuepress-plugin-clean-urls": "^1.0.3"
   },
   "scripts": {
-    "start": "vuepress dev",
-    "build": "vuepress build && npm run urls:pretty",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider vuepress dev",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vuepress build && npm run urls:pretty",
     "urls:pretty": "find ./dist -type f ! -name \"*.*\" -exec sh -c 'mv \"$0\" \"$0.html\"' {} \\;"
   }
 }

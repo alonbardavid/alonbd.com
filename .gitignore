@@ -5,6 +5,7 @@
 target/
 tmp/
 **/dist
+.wrangler/
 
 #---------------------------------
 # Extensions
