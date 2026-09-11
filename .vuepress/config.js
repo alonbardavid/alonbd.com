@@ -26,6 +26,10 @@ module.exports = {
       {
         title:"Stackoverflow",
         url:"https://stackoverflow.com/users/1764456/alon-bar-david"
+      },
+      {
+        title:"Medium",
+        url:"https://medium.com/@abardavid"
       }
     ]
   },
