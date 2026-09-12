@@ -6,7 +6,10 @@ module.exports = {
   evergreen:true,
   dest:"dist",
   head:[
-    ['link',{rel:"stylesheet",type:"text/css",href:"/fonts/fonts.css"}]
+    ['link',{rel:"stylesheet",type:"text/css",href:"/fonts/fonts.css"}],
+    ['link',{rel:"icon",type:"image/svg+xml",href:"/favicon.svg"}],
+    ['link',{rel:"alternate icon",type:"image/x-icon",href:"/favicon.ico"}],
+    ['link',{rel:"apple-touch-icon",href:"/apple-touch-icon.png"}]
   ],
   markdown: {
     extendMarkdown : md => {
