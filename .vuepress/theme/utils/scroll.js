@@ -27,9 +27,7 @@ export function whenScrollDown(cb,min=0){
             cb(true);
         } else {
             // Scroll Up
-            if(st) {
-                cb(false);
-            }
+            cb(false);
         }
 
         lastScrollTop = st;

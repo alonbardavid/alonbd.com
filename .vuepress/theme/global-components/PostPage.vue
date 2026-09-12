@@ -22,9 +22,14 @@
 </script>
 <style lang="stylus">
     @import "../styles/variables.styl"
+    @import "../styles/responsive.styl"
     .post {
         a {
             color: link-color;
+        }
+        // clears the fixed menu bar, which the post would otherwise start under
+        +respond-to(phones) {
+            padding-top: 45px;
         }
     }
     .subline-date {

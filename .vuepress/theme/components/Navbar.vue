@@ -22,7 +22,7 @@
 <script>
     import Logo from '!!raw-loader!./logo.svg';
     import {whenScrollDown} from "../utils/scroll";
-    import {flipGroup} from '../utils/flip';
+    import {morph} from '../utils/morph';
 
     export default {
     name: "navbar",
@@ -31,6 +31,7 @@
     },
     data:()=>({
       hide:false,
+      animating:false,
       Logo
     }),
     mounted(){
@@ -40,25 +41,27 @@
     },
     computed:{
       className(){
-        return `menu ${this.fullScreen?'full-screen':''} ${this.hide?'hidden':''}`
+        return ['menu',
+          this.fullScreen?'full-screen':'',
+          this.hide?'hidden':'',
+          this.animating?'animating':''].filter(Boolean).join(' ')
       }
     },
     watch:{
       "fullScreen":function(fullScreen){
         const node = this.$el;
-        flipGroup([
-          {element: node.querySelector(".logo"), duration: 300}
-        ],()=>{
-          window.scrollTo(0,0)
-          if (fullScreen) {
-            node.classList.add('full-screen');
-          } else {
-            node.classList.remove('full-screen');
-          }
+        const logo = node.querySelector(".logo svg");
+        // the menu re-renders on the next tick, so the classes the measurement
+        // needs are applied by hand here and left for vue to render identically.
+        this.hide = false;
+        this.animating = true;
+        morph(logo,()=>{
+          window.scrollTo(0,0);
+          node.classList.remove('hidden');
+          node.classList.add('animating');
+          node.classList.toggle('full-screen',fullScreen);
         }).then(()=>{
-          if (fullScreen) {
-            //node.classList.add('fullscreen-tran-finished');
-          }
+          this.animating = false;
         })
       }
     }
@@ -71,6 +74,13 @@
 
     .menu {
         z-index:10;
+
+        +respond-to(phones) {
+            background-color: rgba(255,255,255,0);
+            border-bottom: 1px solid transparent;
+            transition: top 0.2s ease-in-out, background-color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+        }
+
         .logo {
             width:100%;
             margin:5px;
@@ -78,17 +88,19 @@
             a {
                 display: block;
             }
-            h1 {
-                margin: 4px 0px 0px 0px;
-                overflow:hidden;
-            }
             svg {
                 width:100%;
+                // the logo travels by transform alone, anchored top left so the
+                // translate + scale morph lines up with its layout position.
+                transform-origin: 0 0;
 
                 .text {
                     pointer-events: none;
-                    transition: transform 0.4s ease-in-out;
-
+                    transition: opacity 0.3s ease-in-out;
+                }
+                .dots {
+                    transform-box: fill-box;
+                    transform-origin: center;
                 }
             }
 
@@ -135,36 +147,48 @@
                 +respond-to(phones) {width:100%}
 
                 margin:50px auto auto auto;
-
-                svg .text {
-                    +respond-to(phones) {
-                        transform: translateY(0);
-                    }
-                }
             }
             nav {
                 opacity:0;
                 transition: opacity 0s;
             }
         }
-        &:not(.full-screen) .logo{
+        &:not(.full-screen) .logo {
             +respond-to(phones) {
                 svg {
                     height:42px;
                     width: auto;
+
                     .text {
-                        transform: scale(0.3) translate(1000px,1800px);
+                        opacity: 0;
                     }
                 }
             }
         }
-        &.fullscreen-tran-finished {
+        // only the dots are kept once the logo has settled into the phone bar -
+        // clipping any earlier would cut off the logo on its way there.
+        &:not(.full-screen):not(.animating) .logo a {
             +respond-to(phones) {
-                a {
                 width: 48px;
-                height: 42px;
                 overflow: hidden;
-                }
+            }
+        }
+        &.animating {
+            // `top` snaps to its resting value so the morph can measure where
+            // the logo is actually headed, the rest of the bar still fades in.
+            +respond-to(phones) {
+                transition: background-color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+            }
+
+            .logo svg {
+                overflow: visible;
+            }
+            .dots {
+                animation: logo-spin 0.5s ease-in-out;
+            }
+            // returning home unwinds the spin the other way
+            &.full-screen .dots {
+                animation: logo-spin 0.5s ease-in-out reverse;
             }
         }
         &:not(.full-screen) {
@@ -173,14 +197,24 @@
                 width:100%;
                 position:fixed;
                 top:0px;
-                background: white;
-                border-bottom: 1px solid color-light-grey;
-                transition: top 0.2s ease-in-out;
+                background-color: white;
+                border-bottom-color: color-light-grey;
 
                 &.hidden {
                     top:-55px;
                 }
             }
+        }
+    }
+
+    @keyframes logo-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .menu.animating .dots {
+            animation: none;
         }
     }
 </style>
