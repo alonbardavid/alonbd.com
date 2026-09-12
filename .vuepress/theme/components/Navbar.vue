@@ -96,7 +96,6 @@
 
                 .text {
                     pointer-events: none;
-                    transition: opacity 0.3s ease-in-out;
                 }
                 .dots {
                     transform-box: fill-box;
@@ -153,24 +152,17 @@
                 transition: opacity 0s;
             }
         }
+        // the whole lockup rides into the phone bar, just at menu size
         &:not(.full-screen) .logo {
             +respond-to(phones) {
                 svg {
                     height:42px;
                     width: auto;
-
-                    .text {
-                        opacity: 0;
-                    }
                 }
-            }
-        }
-        // only the dots are kept once the logo has settled into the phone bar -
-        // clipping any earlier would cut off the logo on its way there.
-        &:not(.full-screen):not(.animating) .logo a {
-            +respond-to(phones) {
-                width: 48px;
-                overflow: hidden;
+                // otherwise the rest of the bar is an invisible link home
+                a {
+                    width: fit-content;
+                }
             }
         }
         &.animating {
